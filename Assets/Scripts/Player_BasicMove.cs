@@ -11,10 +11,12 @@ public class Player_BasicMove : MonoBehaviour
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] Rigidbody rigidbody;
 
+    private bool isAlive;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.isAlive = true;
     }
 
     // Update is called once per frame
@@ -22,11 +24,6 @@ public class Player_BasicMove : MonoBehaviour
     {
         MoveCharacter();
         Jump();
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-
     }
 
     private void MoveCharacter()
@@ -47,4 +44,13 @@ public class Player_BasicMove : MonoBehaviour
     }
 
 
+
+    public void SetIsAlive(Boolean state)
+    {
+        this.isAlive = state;
+    }
+    public Boolean GetIsAlive()
+    {
+        return this.isAlive;
+    }
 }
