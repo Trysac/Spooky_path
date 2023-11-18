@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player_BasicMove : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 250f;
@@ -16,14 +16,16 @@ public class Player_BasicMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.isAlive = true;
+        isAlive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveCharacter();
-        Jump();
+        if (isAlive) {
+            MoveCharacter();
+            Jump();
+        }
     }
 
     private void MoveCharacter()
@@ -47,10 +49,10 @@ public class Player_BasicMove : MonoBehaviour
 
     public void SetIsAlive(Boolean state)
     {
-        this.isAlive = state;
+        isAlive = state;
     }
     public Boolean GetIsAlive()
     {
-        return this.isAlive;
+        return isAlive;
     }
 }

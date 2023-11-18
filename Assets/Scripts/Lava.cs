@@ -21,6 +21,7 @@ public class Lava : MonoBehaviour
         if (other.gameObject.transform.tag.Equals("Player"))
         {
             Debug.Log("DEAD");
+            other.GetComponent<Player>().SetIsAlive(false);
         }
     }
 }
