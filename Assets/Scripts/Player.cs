@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     /// 2. Jump
     /// </summary>
 
-    // Just validate if the player is moving, and call the respective funtion of walk() or run()
+    // Validate if the player is moving, and call the respective funtion of walk() or run()
     private void Move()
     {
         if (rigidbody.velocity.magnitude > 0) {
