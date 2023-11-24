@@ -4,15 +4,20 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float runningSpeed = 8f;
     [SerializeField] float jumpForce = 250f;
+    [SerializeField] float rotationSpeed = 720f;
+    
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] Animator animator;
+    
+    [SerializeField] Transform model3D;
 
     private bool isAlive;
     bool isMoving;
@@ -60,7 +65,7 @@ public class Player : MonoBehaviour
         {
             isMoving = false;
             isRunning = false;
-            animator.SetTrigger("StopAllAnimations");
+            // animator.SetTrigger("StopAllAnimations");
             animator.Play("Idle");
         }
         
@@ -75,6 +80,8 @@ public class Player : MonoBehaviour
             {
                 Walk();
             }
+            
+            RotateCharacter();
         }
     }
 
@@ -97,12 +104,48 @@ public class Player : MonoBehaviour
         // Mueve el personaje
         transform.Translate(xInput, 0, zInput);
     }
+    
+    private void RotateCharacter()
+    {
+        if (isMoving | isRunning)
+        {
+            Vector3 movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            if (movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation;
+                if (Math.Abs(Input.GetAxis("Horizontal"))  > 0)
+                {
+                    if (Input.GetAxis("Horizontal")  > 0)
+                    {
+                        toRotation = Quaternion.Euler(0f,270,0f);
+                    }
+                    else
+                    {
+                        toRotation = Quaternion.Euler(0f,90,0f);
+                    }
+                }
+                else
+                {
+                    if (Input.GetAxis("Vertical")  > 0)
+                    {
+                        toRotation = Quaternion.Euler(0f,0,0f);
+                    }
+                    else
+                    {
+                        toRotation = Quaternion.Euler(0f,180,0f);
+                    }
+                }
+
+                model3D.transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 360);
+            }
+        }
+    }
 
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetTrigger("StopAllAnimations");
+            // animator.SetTrigger("StopAllAnimations");
             animator.Play("Jump");
             rigidbody.AddForce(Vector3.up * jumpForce);
         }
@@ -113,8 +156,7 @@ public class Player : MonoBehaviour
     /// ////////////////////////////////
     // Setters and Getters for Player states 
     /// ////////////////////////////////
-
-
+    
     public void SetIsAlive(Boolean state)
     {
         isAlive = state;

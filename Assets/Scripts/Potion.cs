@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    [SerializeField] potionTypes potionType;
+    [SerializeField] potionTypes potion;
     [SerializeField] int effectValue;
 
     GameObject controller;
@@ -21,31 +21,31 @@ public class Potion : MonoBehaviour
     {
         if (other.gameObject.transform.tag.Equals("Player"))
         {
-            switch (potionType)
+            switch (potion)
             {
-                case PotionType.Health:
-                    // La pociÛn es de salud
+                case potionTypes.Health:
+                    // La poci√≥n es de salud
                     break;
-                case PotionType.Estamina:
-                    // La pociÛn es de estamina
+                case potionTypes.Estamina:
+                    // La poci√≥n es de estamina
                     break;
-                case PotionType.Mana:
-                    // La pociÛn es de man·
+                case potionTypes.Mana:
+                    // La poci√≥n es de man√°
                     break;
-                case PotionType.Damage:
-                    // La pociÛn es de daÒo
+                case potionTypes.Damage:
+                    // La poci√≥n es de da√±o
                     break;
-                case PotionType.Speed:
-                    // La pociÛn es de velocidad
+                case potionTypes.Speed:
+                    // La poci√≥n es de velocidad
                     break;
-                case PotionType.Defense:
-                    // La pociÛn es de defensa
+                case potionTypes.Defense:
+                    // La poci√≥n es de defensa
                     break;
-                case PotionType.Special:
-                    // La pociÛn es especial
+                case potionTypes.Special:
+                    // La poci√≥n es especial
                     break;
                 default:
-                    Debug.Log("La pociÛn no es de un tipo v·lido");
+                    Debug.Log("La poci√≥n no es de un tipo v√°lido");
                     break;
             }
 
