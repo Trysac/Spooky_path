@@ -20,8 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] int candys;
     [SerializeField] int generalScore;
 
-
-
+    
 
     // Start is called before the first frame update
     void Start()
