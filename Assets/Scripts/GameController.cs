@@ -14,18 +14,19 @@ public class GameController : MonoBehaviour
     [SerializeField] int mana = 100;
     [SerializeField] int stamina = 100;
 
-    //Player score
+    // Player score
     [SerializeField] int coins;
     [SerializeField] int artifacts;
     [SerializeField] int candys;
     [SerializeField] int generalScore;
 
-    
+    // General Flags
+    private bool isPlayerAlive;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isPlayerAlive = true;
     }
 
     // Update is called once per frame
@@ -45,4 +46,6 @@ public class GameController : MonoBehaviour
     public int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public int MaxMana { get => maxMana; set => maxMana = value; }
     public int MaxStamina { get => maxStamina; set => maxStamina = value; }
+    public bool IsPlayerAlive
+    { get => isPlayerAlive; set => isPlayerAlive = value; }
 }

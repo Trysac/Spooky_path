@@ -8,24 +8,30 @@ public class Treasure : MonoBehaviour
     [SerializeField] TreasureClassification treasureType;
     [SerializeField] int quantity;
     [SerializeField] int scoreValue = 100;
+    [SerializeField] float delayToDestroy = 0.1f;
     
-    GameObject controller;
     GameController gameController;
+    System.Random random;
     
-    private System.Random random;
+    private bool wasUsed;
     
     void Start()
     {
+        wasUsed = false;
         random = new System.Random();
-        controller = GameObject.Find("GameController");
-        gameController = controller.GetComponent<GameController>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.transform.tag.Equals("Player"))
         {
-            validateTreasureType();
+            if (!wasUsed)
+            {
+                wasUsed = true;
+                validateTreasureType();
+                DestroyAfterDelay();
+            }
         }
     }
 
@@ -65,6 +71,11 @@ public class Treasure : MonoBehaviour
                 // Es un manojo de llaves
                 break;
         }
+    }
+    
+    private void DestroyAfterDelay()
+    {
+        Destroy(gameObject, delayToDestroy);
     }
 }
 

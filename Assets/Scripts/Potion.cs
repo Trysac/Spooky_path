@@ -6,25 +6,38 @@ public class Potion : MonoBehaviour
 {
     [SerializeField] potionTypes potion;
     [SerializeField] int effectValue;
-
-    GameObject controller;
+    [SerializeField] float delayToDestroy = 0.1f;
+    
     GameController gameController;
+    System.Random random;
 
-    private System.Random random;
-
+    private bool wasUsed;
+    
     // Start is called before the first frame update
     void Start()
     {
+        wasUsed = false;
         random = new System.Random();
-        controller = GameObject.Find("GameController");
-        gameController = controller.GetComponent<GameController>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.transform.tag.Equals("Player"))
         {
-            switch (potion)
+            if (!wasUsed)
+            {
+                wasUsed = true;
+                ValidateType();
+                DestroyAfterDelay();
+            }
+            
+        }
+    }
+
+    private void ValidateType()
+    {
+        switch (potion)
             {
                 case potionTypes.Health:
                     if (gameController.Health + effectValue > gameController.MaxHealth)
@@ -36,7 +49,7 @@ public class Potion : MonoBehaviour
                         gameController.Health += effectValue;
                     }
                     break;
-                case potionTypes.Estamina:
+                case potionTypes.Stamina:
                     if (gameController.Stamina + effectValue > gameController.MaxStamina)
                     {
                         gameController.Stamina = gameController.MaxStamina;
@@ -90,15 +103,18 @@ public class Potion : MonoBehaviour
                     Debug.Log("La poción no es de un tipo válido");
                     break;
             }
+    }
 
-        }
+    private void DestroyAfterDelay()
+    {
+        Destroy(gameObject, delayToDestroy);
     }
 }
 
 public enum potionTypes
 {
     Health,
-    Estamina,
+    Stamina,
     Mana,
     Damage,
     Speed,
