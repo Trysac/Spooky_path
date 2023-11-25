@@ -10,9 +10,12 @@ public class Potion : MonoBehaviour
     GameObject controller;
     GameController gameController;
 
+    private System.Random random;
+
     // Start is called before the first frame update
     void Start()
     {
+        random = new System.Random();
         controller = GameObject.Find("GameController");
         gameController = controller.GetComponent<GameController>();
     }
@@ -24,13 +27,34 @@ public class Potion : MonoBehaviour
             switch (potion)
             {
                 case potionTypes.Health:
-                    // La poción es de salud
+                    if (gameController.Health + effectValue > gameController.MaxHealth)
+                    {
+                        gameController.Health = gameController.MaxHealth;
+                    }
+                    else
+                    {
+                        gameController.Health += effectValue;
+                    }
                     break;
                 case potionTypes.Estamina:
-                    // La poción es de estamina
+                    if (gameController.Stamina + effectValue > gameController.MaxStamina)
+                    {
+                        gameController.Stamina = gameController.MaxStamina;
+                    }
+                    else
+                    {
+                        gameController.Stamina += effectValue;
+                    }
                     break;
                 case potionTypes.Mana:
-                    // La poción es de maná
+                    if (gameController.Mana + effectValue > gameController.MaxMana)
+                    {
+                        gameController.Mana = gameController.MaxMana;
+                    }
+                    else
+                    {
+                        gameController.Mana += effectValue;
+                    }
                     break;
                 case potionTypes.Damage:
                     // La poción es de daño
@@ -43,6 +67,24 @@ public class Potion : MonoBehaviour
                     break;
                 case potionTypes.Special:
                     // La poción es especial
+                    break;
+                case potionTypes.Elixir:
+                    int luck = random.Next(0, 6);
+                    switch (luck)
+                    {   
+                        case 1:
+                            gameController.MaxHealth += effectValue;
+                            gameController.Health += effectValue;
+                            break;
+                        case 2:
+                            gameController.MaxMana += effectValue;
+                            gameController.MaxMana += effectValue;
+                            break;
+                        case 3:
+                            gameController.MaxStamina += effectValue;
+                            gameController.Stamina += effectValue;
+                            break;
+                    }
                     break;
                 default:
                     Debug.Log("La poción no es de un tipo válido");
@@ -61,5 +103,6 @@ public enum potionTypes
     Damage,
     Speed,
     Defense,
-    Special
+    Special,
+    Elixir   // Increase player atributes
 }

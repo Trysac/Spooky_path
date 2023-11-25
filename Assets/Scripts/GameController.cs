@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    // Player atributes
+    [SerializeField] int maxHealth = 100;
+    [SerializeField] int maxMana = 100;
+    [SerializeField] int maxStamina = 100;
+    
     // Player stats
     [SerializeField] int health = 100;
     [SerializeField] int mana = 100;
@@ -38,4 +43,7 @@ public class GameController : MonoBehaviour
     public int Health { get => health; set => health = value; }
     public int Mana { get => mana; set => mana = value; }
     public int Stamina { get => stamina; set => stamina = value; }
+    public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public int MaxMana { get => maxMana; set => maxMana = value; }
+    public int MaxStamina { get => maxStamina; set => maxStamina = value; }
 }
