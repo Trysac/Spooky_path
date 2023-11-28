@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    // Setters and Getters
+    // Setters and Getters - Properties
     public int Coins { get => coins; set => coins = value; }
     public int Artifacts { get => artifacts; set => artifacts = value; }
     public int Candys { get => candys; set => candys = value; }
@@ -46,6 +46,5 @@ public class GameController : MonoBehaviour
     public int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public int MaxMana { get => maxMana; set => maxMana = value; }
     public int MaxStamina { get => maxStamina; set => maxStamina = value; }
-    public bool IsPlayerAlive
-    { get => isPlayerAlive; set => isPlayerAlive = value; }
+    public bool IsPlayerAlive { get => isPlayerAlive; set => isPlayerAlive = value; }
 }

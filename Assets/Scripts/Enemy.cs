@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.collider.tag.Equals("Player")) {
             Debug.Log("DEAD");
-            other.gameObject.GetComponent<Player>().SetIsAlive(false);
+            other.gameObject.GetComponent<Player>().IsAlive = false;
         }
     }
 }

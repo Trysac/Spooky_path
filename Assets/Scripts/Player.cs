@@ -20,16 +20,18 @@ public class Player : MonoBehaviour
     [SerializeField] Transform model3D;
 
     private bool isAlive;
-    bool isMoving;
-    bool isJumping;
-    bool isRunning;
+    private bool isMoving;
+    private bool isRunning;
+    private bool isJumping;
+    
+    private bool isAttacking;
+    private bool isAlreadyAttacking;
+
 
     // Start is called before the first frame update
     void Start()
     {
         isAlive = true;
-        isJumping = false;
-        isRunning = false;
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour
     {
         if (isAlive)
         {
+            BasicAttack();
             Move();
             Jump();
         }
@@ -48,25 +51,35 @@ public class Player : MonoBehaviour
     ///     1.1 Walk
     ///     1.2 Run
     /// 2. Jump
+    /// 3. Basic Attack
     /// </summary>
 
     // Validate if the player is moving, and call the respective funtion of walk() or run()
     private void Move()
     {
         if (rigidbody.velocity.magnitude > 0) {
-            isMoving = true;
-            if (Input.GetKeyDown(KeyCode.LeftShift) | Input.GetKeyDown(KeyCode.RightShift))
+            if (!isMoving)
             {
-                isRunning = true;
+                isMoving = true;
+                animator.SetBool("isMoving",isMoving);
             }
-            else { isRunning = false; }
+            if (Input.GetKey(KeyCode.LeftShift) | Input.GetKey(KeyCode.RightShift))
+            {
+                if (!isRunning)
+                {
+                    isRunning = true;
+                    animator.SetBool("isRunning",isRunning);
+                }
+            }
+            else
+            {
+                isRunning = false;
+                animator.SetBool("isRunning",isRunning);
+            }
         }
         else
         {
-            isMoving = false;
-            isRunning = false;
-            // animator.SetTrigger("StopAllAnimations");
-            animator.Play("Idle");
+            StopMovement();
         }
         
 
@@ -80,28 +93,27 @@ public class Player : MonoBehaviour
             {
                 Walk();
             }
-            
             RotateCharacter();
         }
     }
 
     private void Walk()
     {
-        // Obtiene la entrada del usuario
+        // Get User Input
         float zInput = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
         float xInput = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
 
-        // Mueve el personaje
+        // character move
         transform.Translate(xInput, 0, zInput);
     }
 
     private void Run()
     {
-        // Obtiene la entrada del usuario
+        // Get User Input
         float zInput = Input.GetAxis("Horizontal") * Time.deltaTime * runningSpeed;
         float xInput = Input.GetAxis("Vertical") * Time.deltaTime * runningSpeed;
 
-        // Mueve el personaje
+        // character move
         transform.Translate(xInput, 0, zInput);
     }
     
@@ -145,24 +157,52 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // animator.SetTrigger("StopAllAnimations");
-            animator.Play("Jump");
+            StopMovement();
+            isJumping = true;
+            animator.SetBool("isJumping",isJumping);
             rigidbody.AddForce(Vector3.up * jumpForce);
         }
     }
 
+    private void BasicAttack()
+    {
+        if (!isAlreadyAttacking && Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StopMovement();
+            isAttacking = true;
+            isAlreadyAttacking = true;
+            animator.SetBool("isAttacking",isAttacking);
+        }
 
+        CheckIfAttacking();
+    }
 
-    /// ////////////////////////////////
-    // Setters and Getters for Player states 
-    /// ////////////////////////////////
+    private void CheckIfAttacking()
+    {
+        if (isAttacking)
+        {
+            // Check if the attacking animation has finish
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                isAttacking = false;
+                isAlreadyAttacking = false;
+                animator.SetBool("isAttacking", isAttacking);
+            }
+        }
+    }
+
+    // Set all moving variables to false
+    private void StopMovement()
+    {
+        isMoving = false;
+        isRunning = false;
+        animator.SetBool("isRunning",isRunning);
+        animator.SetBool("isMoving",isMoving);
+    }
+
     
-    public void SetIsAlive(Boolean state)
-    {
-        isAlive = state;
-    }
-    public Boolean GetIsAlive()
-    {
-        return isAlive;
-    }
+    /// ////////////////////////////////
+    // Setters and Getters for Player states - Properties
+    /// ////////////////////////////////
+    public bool IsAlive { get => isAlive; set => isAlive = value; }
 }
