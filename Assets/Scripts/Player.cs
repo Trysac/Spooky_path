@@ -51,7 +51,8 @@ public class Player : MonoBehaviour
     ///     1.1 Walk
     ///     1.2 Run
     /// 2. Jump
-    /// 3. Basic Attack
+    /// 3. Attack
+    ///     3.1 Basic
     /// </summary>
 
     // Validate if the player is moving, and call the respective funtion of walk() or run()
