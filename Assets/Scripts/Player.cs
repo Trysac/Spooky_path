@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] float runningSpeed = 8f;
     [SerializeField] float jumpForce = 250f;
     [SerializeField] float rotationSpeed = 720f;
+    [SerializeField] int maxJump = 2;
     
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] Rigidbody rigidbody;
@@ -20,9 +22,13 @@ public class Player : MonoBehaviour
     [SerializeField] Transform model3D;
 
     private bool isAlive;
+    
     private bool isMoving;
     private bool isRunning;
+    
     private bool isJumping;
+    private bool isOnTheGround;
+    private int jumps;
     
     private bool isAttacking;
     private bool isAlreadyAttacking;
@@ -32,6 +38,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         isAlive = true;
+        isOnTheGround = true;
     }
 
     // Update is called once per frame
@@ -42,6 +49,17 @@ public class Player : MonoBehaviour
             BasicAttack();
             Move();
             Jump();
+        }
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.transform.tag.Equals("Floor"))
+        {
+            isOnTheGround = true;
+            isJumping = false;
+            animator.SetBool("isJumping",isJumping);
+            jumps = 0;
         }
     }
 
@@ -156,12 +174,17 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (jumps < maxJump)
         {
-            StopMovement();
-            isJumping = true;
-            animator.SetBool("isJumping",isJumping);
-            rigidbody.AddForce(Vector3.up * jumpForce);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StopMovement();
+                isJumping = true;
+                jumps++;
+                isOnTheGround = false;
+                animator.SetBool("isJumping",isJumping);
+                rigidbody.AddForce(Vector3.up * jumpForce);
+            }
         }
     }
 
