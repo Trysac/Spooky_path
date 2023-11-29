@@ -49,25 +49,47 @@ public class Enemy : MonoBehaviour
         switch (movementConfiguration)
         {
             case MovementConfiguration.Patrol:
-                // Manejar la configuración de movimiento de patrullaje
+                Patrol();
                 break;
             case MovementConfiguration.SurveillanceAndPatrolling:
-                // Manejar la configuración de movimiento de vigilancia y patrullaje
+                SurveillanceAndPatrolling();
                 break;
             case MovementConfiguration.PatrollingAndPursuit:
-                // Manejar la configuración de movimiento estático
+                PatrollingAndPursuit();
                 break;
             case MovementConfiguration.Pursuit:
-                // Manejar la configuración de movimiento de persecución
+                Pursuit();
                 break;
             default:
-                // This will be for statics or patterns without implemented functionality
+                Static();
                 break;
         }
     }
 
+    private void Patrol()
+    {
+        Debug.Log("Patrolling");
+    }
 
+    private void SurveillanceAndPatrolling()
+    {
+        Debug.Log("Surveillance and Patrolling");
+    }
 
+    private void Static()
+    {
+        Debug.Log("Static");
+    }
+
+    private void Pursuit()
+    {
+        Debug.Log("Pursuit");
+    }
+
+    private void PatrollingAndPursuit()
+    {
+        Debug.Log("Patrolling and Pursuit");
+    }
 }
 
 public enum EnemyType
