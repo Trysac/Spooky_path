@@ -10,15 +10,19 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+    
     [SerializeField] float runningSpeed = 8f;
+    [SerializeField] float staminaDecrementSpeed = 1;
+    [SerializeField] float staminaRecoverySpeed = 2;
+    
     [SerializeField] float jumpForce = 250f;
-    [SerializeField] float rotationSpeed = 720f;
     [SerializeField] int maxJump = 2;
+    
+    [SerializeField] float rotationSpeed = 720f;
     
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] Animator animator;
-    
     [SerializeField] Transform model3D;
 
     private bool isAlive;
@@ -33,12 +37,14 @@ public class Player : MonoBehaviour
     private bool isAttacking;
     private bool isAlreadyAttacking;
 
+    GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
         isAlive = true;
         isOnTheGround = true;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -48,6 +54,7 @@ public class Player : MonoBehaviour
         {
             BasicAttack();
             Move();
+            IncreaseStamina();
             Jump();
         }
     }
@@ -131,9 +138,39 @@ public class Player : MonoBehaviour
         // Get User Input
         float zInput = Input.GetAxis("Horizontal") * Time.deltaTime * runningSpeed;
         float xInput = Input.GetAxis("Vertical") * Time.deltaTime * runningSpeed;
-
+        
         // character move
         transform.Translate(xInput, 0, zInput);
+        DecreaseStamina();
+    }
+    
+    private void DecreaseStamina()
+    {
+        float decrementAmount = staminaDecrementSpeed * Time.deltaTime;
+        // Ensure that stamina doesn't go negative
+        gameController.Stamina 
+            = Mathf.Max(0, gameController.Stamina - Mathf.RoundToInt(decrementAmount)); 
+    }
+    
+    private void IncreaseStamina()
+    {
+        float recoveryAmount = staminaRecoverySpeed * Time.deltaTime;
+        if (!isRunning)
+        {
+            gameController.Stamina 
+                = Mathf.Min(gameController.MaxStamina, gameController.Stamina + Mathf.RoundToInt(recoveryAmount)); 
+            
+            // if (isMoving | isJumping | isAttacking)
+            // {
+            //     gameController.Stamina 
+            //         = Mathf.Min(gameController.MaxStamina, gameController.Stamina + Mathf.RoundToInt(recoveryAmount)); 
+            // }
+            // else
+            // {
+            //     gameController.Stamina 
+            //         = Mathf.Min(gameController.MaxStamina, gameController.Stamina + Mathf.RoundToInt(recoveryAmount)); 
+            // }
+        }
     }
     
     private void RotateCharacter()
