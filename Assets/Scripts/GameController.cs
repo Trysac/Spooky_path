@@ -23,16 +23,22 @@ public class GameController : MonoBehaviour
     // General Flags
     private bool isPlayerAlive;
 
+    private Player Player;
+
     // Start is called before the first frame update
     void Start()
     {
         isPlayerAlive = true;
+        Player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!Player.IsAlive)
+        {
+            isPlayerAlive = false;
+        }
     }
 
     // Setters and Getters - Properties
