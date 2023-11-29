@@ -6,15 +6,18 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    [Header("General Configuration")] 
+    [SerializeField] float waitTime = 1f;
+    
+    [Header("Buttons")] 
     [SerializeField] Button tutorialButton;
     [SerializeField] Button PlayButton;
     [SerializeField] Button ExitButton;
     
+    [Header("Target Escenes")] 
     [SerializeField] int tutorialEsceneValue;
     [SerializeField] int firstLevelEsceneValue;
     
-    [SerializeField] float waitTime = 1f;
-
     private bool hasPressAnyButton;
     // Start is called before the first frame update
     void Start()

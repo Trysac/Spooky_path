@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    // Player atributes
+    [Header("Player atributes")] 
     [SerializeField] int maxHealth = 100;
     [SerializeField] int maxMana = 100;
     [SerializeField] int maxStamina = 100;
     
-    // Player stats
+    [Header("Player stats")] 
     [SerializeField] int health = 100;
     [SerializeField] int mana = 100;
     [SerializeField] int stamina = 100;
-
-    // Player score
+    
+    [Header("Player score")] 
     [SerializeField] int coins;
     [SerializeField] int artifacts;
     [SerializeField] int candys;

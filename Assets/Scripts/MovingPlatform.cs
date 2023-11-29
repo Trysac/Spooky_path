@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    [Header("Movement Configuration")] 
     [SerializeField] MovementType movementType;
     [SerializeField] Vector3 initialPoint;
     [SerializeField] Vector3 finalPoint;
-    
-    [SerializeField] float speed = 0.5f;
     [SerializeField] float ascendingHeight = 5.0f;
     [SerializeField] float circularRadius = 5.0f;
+    
+    [Header("Movement Parameters")] 
+    [SerializeField] float speed = 0.5f;
+
 
     private bool isFalling;
     // Start is called before the first frame update

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
+    [Header("General Stats")] 
     [SerializeField] potionTypes potion;
     [SerializeField] int effectValue;
     [SerializeField] float delayToDestroy = 0.1f;

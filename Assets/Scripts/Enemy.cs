@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("General Stats")] 
     [SerializeField] EnemyType enemyType;
     [SerializeField] int health = 100;
     [SerializeField] int scoreValue = 100;
-    
+    [SerializeField] float delayToDestroy = 0.1f;
+
+    [Header("Attack Configuration")] 
+    [SerializeField] int attackDamge = 10;
+    [SerializeField] float delayBetweenAttacks = 0.1f;
+
+    [Header("Movement Configuration")] 
     [SerializeField] MovementConfiguration movementConfiguration;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float runningSpeed = 8f;
 
-    [SerializeField] float delayBetweenAttacks = 0.1f;
-    [SerializeField] float delayToDestroy = 0.1f;
-    
     // Control variables
     private bool isAlive;
     private bool isMoving;

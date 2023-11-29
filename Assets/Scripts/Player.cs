@@ -9,17 +9,20 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement Configuration")] 
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float rotationSpeed = 720f;
     
+    [Header("Running Configuration")] 
     [SerializeField] float runningSpeed = 8f;
     [SerializeField] float staminaDecrementSpeed = 1;
     [SerializeField] float staminaRecoverySpeed = 2;
     
+    [Header("Jumping Configuration")] 
     [SerializeField] float jumpForce = 250f;
     [SerializeField] int maxJump = 2;
     
-    [SerializeField] float rotationSpeed = 720f;
-    
+    [Header("GameObjects References")] 
     [SerializeField] BoxCollider boxCollider;
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] Animator animator;

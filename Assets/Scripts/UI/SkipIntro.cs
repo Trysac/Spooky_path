@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SkipIntro : MonoBehaviour
 {
+    [Header("General Configuration")] 
     [SerializeField] float waitTime = 3f;
     [SerializeField] int nextEsceneValue;
     

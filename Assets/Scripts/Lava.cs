@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
+    [Header("Animation Configuration")] 
     [SerializeField] float X_Speed = 0.008f;
     [SerializeField] float Y_Speed;
     [SerializeField] private Renderer renderer;

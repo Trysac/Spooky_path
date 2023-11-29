@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Stats Bars
+    [Header("Stats Bars")] 
     [SerializeField] Slider healthBar;
     [SerializeField] Slider manaBar;
     [SerializeField] Slider staminaBar;
     
-    // Stats Values
+    [Header("Stats Values")] 
     [SerializeField] TextMeshProUGUI  healthText;
     [SerializeField] TextMeshProUGUI  manaText;
     [SerializeField] TextMeshProUGUI  staminaText;
     
-    // ScoreHub
+    [Header("ScoreHub")] 
     [SerializeField] TextMeshProUGUI  coinQuantityText;
     [SerializeField] TextMeshProUGUI  artifactsQuantityText;
     [SerializeField] TextMeshProUGUI  candysQuantityText;

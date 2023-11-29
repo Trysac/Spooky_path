@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 
 public class Treasure : MonoBehaviour
 {
+    [Header("General Stats")] 
     [SerializeField] TreasureClassification treasureType;
     [SerializeField] int quantity;
     [SerializeField] int scoreValue = 100;
