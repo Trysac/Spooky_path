@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,11 @@ public class GameController : MonoBehaviour
     [SerializeField] int generalScore;
     [SerializeField] int level;
     
+    [Header("Load Scenes Configuration")] 
+    [SerializeField] AudioClip[] soundClip;
+    [SerializeField] float delayBeforeLoad = 3f;
+    [SerializeField] AudioSource audioSource;
+    
     // General Flags
     private bool isPlayerAlive;
 
@@ -30,6 +36,7 @@ public class GameController : MonoBehaviour
     {
         isPlayerAlive = true;
         Player = GameObject.Find("Player").GetComponent<Player>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,7 +45,27 @@ public class GameController : MonoBehaviour
         if (!Player.IsAlive)
         {
             isPlayerAlive = false;
+            Player.Die();
+            LoadGameOver();
         }
+    }
+
+    public void LoadGameOver()
+    {
+        StartCoroutine(LoadSceneWithDelay(0, 7));
+    }
+    
+    IEnumerator LoadSceneWithDelay(int clipPositionInArray, int sceneIndex)
+    {
+        audioSource.clip = soundClip[clipPositionInArray];
+        audioSource.Play();
+        yield return new WaitForSeconds(delayBeforeLoad);
+        LoadScene(sceneIndex);
+    }
+    
+    void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 
     // Setters and Getters - Properties

@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
     /// 2. Jump
     /// 3. Attack
     ///     3.1 Basic
+    /// 4. 
     /// </summary>
 
     // Validate if the player is moving, and call the respective funtion of walk() or run()
@@ -258,6 +259,14 @@ public class Player : MonoBehaviour
         animator.SetBool("isMoving",isMoving);
     }
 
+    public void Die()
+    {
+        isAlive = false;
+        // AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        // audioSource.clip = deathSound;
+        // audioSource.Play();
+        // animaciones, efectos, etc.
+    }
     
     /// ////////////////////////////////
     // Setters and Getters for Player states - Properties
