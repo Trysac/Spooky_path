@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform model3D;
 
     private bool isAlive;
+    private bool isAlreadyDead;
     
     private bool isMoving;
     private bool isRunning;
@@ -40,6 +41,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         isAlive = true;
+        isAlreadyDead = false;
+        animator.SetBool("isAlive",isAlive);
         isOnTheGround = true;
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
@@ -261,11 +264,16 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        isAlive = false;
-        // AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        // audioSource.clip = deathSound;
-        // audioSource.Play();
-        // animaciones, efectos, etc.
+        if (!isAlreadyDead)
+        {
+            isAlreadyDead = true; 
+            isAlive = false;
+            StopMovement();
+            // AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            // audioSource.clip = deathSound;
+            // audioSource.Play();
+            animator.SetBool("isAlive",isAlive);
+        }
     }
     
     /// ////////////////////////////////
