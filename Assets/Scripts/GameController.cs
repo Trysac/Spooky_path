@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class GameController : MonoBehaviour
     [SerializeField] int artifacts;
     [SerializeField] int candys;
     [SerializeField] int generalScore;
-
+    [SerializeField] int level;
+    
     // General Flags
     private bool isPlayerAlive;
 
@@ -32,7 +34,7 @@ public class GameController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if (!Player.IsAlive)
         {
             isPlayerAlive = false;
@@ -51,4 +53,5 @@ public class GameController : MonoBehaviour
     public int MaxMana { get => maxMana; set => maxMana = value; }
     public int MaxStamina { get => maxStamina; set => maxStamina = value; }
     public bool IsPlayerAlive { get => isPlayerAlive; set => isPlayerAlive = value; }
+    public int Level { get => level; set => level = value; }
 }

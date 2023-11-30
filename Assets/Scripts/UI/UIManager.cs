@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI  artifactsQuantityText;
     [SerializeField] TextMeshProUGUI  candysQuantityText;
     [SerializeField] TextMeshProUGUI  generalSocreText;
+    [SerializeField] TextMeshProUGUI  levelText;
     
     GameController gameController;
     
@@ -64,5 +65,6 @@ public class UIManager : MonoBehaviour
         artifactsQuantityText.text = gameController.Artifacts.ToString();
         candysQuantityText.text = gameController.Candys.ToString();
         generalSocreText.text = gameController.GeneralScore.ToString();
+        levelText.text = "level " + gameController.Level;
     }
 }
