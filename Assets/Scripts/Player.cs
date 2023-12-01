@@ -21,7 +21,8 @@ public class Player : MonoBehaviour
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] Animator animator;
     [SerializeField] Transform model3D;
-
+    [SerializeField] EffectsManager effectsManager;
+    
     private bool isAlive;
     private bool isAlreadyDead;
     
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour
     {
         if (isAlive)
         {
-            BasicAttack();
+            checkAttack();
             Move();
             IncreaseStamina();
             Jump();
@@ -226,17 +227,49 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void checkAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            BasicAttack();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            // HandleButtonPress(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            // HandleButtonPress(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            // HandleButtonPress(4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            // HandleButtonPress(5);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            // HandleButtonPress(6);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            // HandleButtonPress(7);
+        }
+        
+        CheckIfAttacking();
+    }
+
     private void BasicAttack()
     {
-        if (!isAlreadyAttacking && Input.GetKeyDown(KeyCode.Alpha1))
+        if (!isAlreadyAttacking)
         {
             StopMovement();
             isAttacking = true;
             isAlreadyAttacking = true;
             animator.SetBool("isAttacking",isAttacking);
         }
-
-        CheckIfAttacking();
     }
 
     private void CheckIfAttacking()
@@ -251,6 +284,11 @@ public class Player : MonoBehaviour
                 animator.SetBool("isAttacking", isAttacking);
             }
         }
+    }
+
+    private void SpecialAttackOne()
+    {
+        // effectsManager.Effects[0].damage;
     }
 
     // Set all moving variables to false

@@ -22,9 +22,8 @@ public class GameController : MonoBehaviour
     [SerializeField] int level;
     
     [Header("Load Scenes Configuration")] 
-    [SerializeField] AudioClip[] soundClip;
     [SerializeField] float delayBeforeLoad = 3f;
-    [SerializeField] AudioSource audioSource;
+
     
     // General Flags
     private bool isPlayerAlive;
@@ -36,7 +35,6 @@ public class GameController : MonoBehaviour
     {
         isPlayerAlive = true;
         Player = GameObject.Find("Player").GetComponent<Player>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -57,8 +55,6 @@ public class GameController : MonoBehaviour
     
     IEnumerator LoadSceneWithDelay(int clipPositionInArray, int sceneIndex)
     {
-        audioSource.clip = soundClip[clipPositionInArray];
-        audioSource.Play();
         yield return new WaitForSeconds(delayBeforeLoad);
         LoadScene(sceneIndex);
     }
