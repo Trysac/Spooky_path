@@ -234,6 +234,8 @@ public class Player : MonoBehaviour
             return;
         }
         
+        StopAttacksSoundEffects();
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             InstantiateObjectAtPosition(
@@ -242,6 +244,7 @@ public class Player : MonoBehaviour
                 1, 
                 effectsManager.Effects[0].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[0].EffectSound;
+            effectsManager.MainSound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -251,6 +254,7 @@ public class Player : MonoBehaviour
                 2, 
                 effectsManager.Effects[1].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[1].EffectSound;
+            effectsManager.MainSound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -260,6 +264,7 @@ public class Player : MonoBehaviour
                 3, 
                 effectsManager.Effects[2].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[2].EffectSound;
+            effectsManager.MainSound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
@@ -270,6 +275,8 @@ public class Player : MonoBehaviour
                 effectsManager.Effects[3].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[3].EffectSound;
             effectsManager.SecondaySound.clip = effectsManager.Effects[2].SecondaryEffectSound;
+            effectsManager.MainSound.Play();
+            effectsManager.SecondaySound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
@@ -280,6 +287,8 @@ public class Player : MonoBehaviour
                 effectsManager.Effects[4].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[4].EffectSound;
             effectsManager.SecondaySound.clip = effectsManager.Effects[4].SecondaryEffectSound;
+            effectsManager.MainSound.Play();
+            effectsManager.SecondaySound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
@@ -289,6 +298,7 @@ public class Player : MonoBehaviour
                 6, 
                 effectsManager.Effects[5].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[5].EffectSound;
+            effectsManager.MainSound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
@@ -299,6 +309,8 @@ public class Player : MonoBehaviour
                 effectsManager.Effects[6].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[6].EffectSound;
             effectsManager.SecondaySound.clip = effectsManager.Effects[6].SecondaryEffectSound;
+            effectsManager.MainSound.Play();
+            effectsManager.SecondaySound.Play();
         }
     }
     
@@ -325,6 +337,12 @@ public class Player : MonoBehaviour
         isRunning = false;
         animator.SetBool("isRunning",isRunning);
         animator.SetBool("isMoving",isMoving);
+    }
+
+    private void StopAttacksSoundEffects()
+    {
+        effectsManager.MainSound.Stop();
+        effectsManager.SecondaySound.Stop();
     }
 
     public void Die()
