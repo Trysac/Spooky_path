@@ -229,68 +229,95 @@ public class Player : MonoBehaviour
 
     private void checkAttack()
     {
+        if (isAlreadyAttacking)
+        {
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            BasicAttack();
+            InstantiateObjectAtPosition(
+                effectsManager.Effects[0].Vxf, 
+                effectsManager.Effects[0].SpawPoint.position, 
+                1, 
+                effectsManager.Effects[0].Duration);
+            effectsManager.MainSound.clip = effectsManager.Effects[0].EffectSound;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            // HandleButtonPress(2);
+            InstantiateObjectAtPosition(
+                effectsManager.Effects[1].Vxf, 
+                effectsManager.Effects[1].SpawPoint.position, 
+                2, 
+                effectsManager.Effects[1].Duration);
+            effectsManager.MainSound.clip = effectsManager.Effects[1].EffectSound;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            // HandleButtonPress(3);
+            InstantiateObjectAtPosition(
+                effectsManager.Effects[2].Vxf, 
+                effectsManager.Effects[2].SpawPoint.position, 
+                3, 
+                effectsManager.Effects[2].Duration);
+            effectsManager.MainSound.clip = effectsManager.Effects[2].EffectSound;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            // HandleButtonPress(4);
+            InstantiateObjectAtPosition(
+                effectsManager.Effects[3].Vxf, 
+                effectsManager.Effects[3].SpawPoint.position, 
+                4, 
+                effectsManager.Effects[3].Duration);
+            effectsManager.MainSound.clip = effectsManager.Effects[3].EffectSound;
+            effectsManager.SecondaySound.clip = effectsManager.Effects[2].SecondaryEffectSound;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            // HandleButtonPress(5);
+            InstantiateObjectAtPosition(
+                effectsManager.Effects[4].Vxf, 
+                effectsManager.Effects[4].SpawPoint.position, 
+                5, 
+                effectsManager.Effects[4].Duration);
+            effectsManager.MainSound.clip = effectsManager.Effects[4].EffectSound;
+            effectsManager.SecondaySound.clip = effectsManager.Effects[4].SecondaryEffectSound;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            // HandleButtonPress(6);
+            InstantiateObjectAtPosition(
+                effectsManager.Effects[5].Vxf, 
+                effectsManager.Effects[5].SpawPoint.position, 
+                6, 
+                effectsManager.Effects[5].Duration);
+            effectsManager.MainSound.clip = effectsManager.Effects[5].EffectSound;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            // HandleButtonPress(7);
+            InstantiateObjectAtPosition(
+                effectsManager.Effects[6].Vxf, 
+                effectsManager.Effects[6].SpawPoint.position, 
+                7, 
+                effectsManager.Effects[6].Duration);
+            effectsManager.MainSound.clip = effectsManager.Effects[6].EffectSound;
+            effectsManager.SecondaySound.clip = effectsManager.Effects[6].SecondaryEffectSound;
         }
-        
-        CheckIfAttacking();
     }
-
-    private void BasicAttack()
-    {
-        if (!isAlreadyAttacking)
+    
+    private void InstantiateObjectAtPosition(GameObject prefab, Vector3 position, int espAttackID, float delayToDestroy)
+    { 
+        StopMovement();
+        isAttacking = true;
+        isAlreadyAttacking = true;
+        animator.SetBool("isAttacking",isAttacking);
+        animator.SetInteger("EspAttack",espAttackID);
+        GameObject instantiatedObject = Instantiate(prefab, position, transform.rotation);
+        instantiatedObject.SetActive(true);
+        instantiatedObject.GetComponent<SelfDestroy>().DestroyWithDelay(delayToDestroy);
+        if (espAttackID.Equals(7) | espAttackID.Equals(6) | espAttackID.Equals(3))
         {
-            StopMovement();
-            isAttacking = true;
-            isAlreadyAttacking = true;
-            animator.SetBool("isAttacking",isAttacking);
+            instantiatedObject.transform.parent = transform;
         }
     }
-
-    private void CheckIfAttacking()
-    {
-        if (isAttacking)
-        {
-            // Check if the attacking animation has finish
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-            {
-                isAttacking = false;
-                isAlreadyAttacking = false;
-                animator.SetBool("isAttacking", isAttacking);
-            }
-        }
-    }
-
-    private void SpecialAttackOne()
-    {
-        // effectsManager.Effects[0].damage;
-    }
-
+    
     // Set all moving variables to false
     private void StopMovement()
     {
@@ -313,9 +340,20 @@ public class Player : MonoBehaviour
             animator.SetBool("isAlive",isAlive);
         }
     }
-    
+
+    public void SetAnimationVariablesToFalse()
+    {
+        animator.SetBool("isAttacking", isAttacking);
+        animator.SetInteger("EspAttack",0);
+    }
+
     /// ////////////////////////////////
     // Setters and Getters for Player states - Properties
     /// ////////////////////////////////
     public bool IsAlive { get => isAlive; set => isAlive = value; }
+    public bool IsMoving { get => isMoving; set => isMoving = value; }
+    public bool IsRunning { get => isRunning; set => isRunning = value; }
+    public bool IsJumping { get => isJumping; set => isJumping = value; }
+    public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
+    public bool IsAlreadyAttacking { get => isAlreadyAttacking; set => isAlreadyAttacking = value; }
 }
