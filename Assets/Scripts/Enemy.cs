@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -11,22 +13,36 @@ public class Enemy : MonoBehaviour
     [Header("Attack Configuration")] 
     [SerializeField] int attackDamge = 10;
     [SerializeField] float delayBetweenAttacks = 0.1f;
+    [SerializeField] Collider attackRange;
 
     [Header("Movement Configuration")] 
     [SerializeField] MovementConfiguration movementConfiguration;
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float runningSpeed = 8f;
+    [SerializeField] float runningSpeed = 8f;    
+    [SerializeField] Vector3 initialPoint;
+    [SerializeField] Vector3 destinationPoint;
+    [SerializeField] float patrollingWaitBetweenPoints = 1f;
+    [SerializeField] float maxPatrollingWaitBetweenPoints = 1f;
 
     // Control variables
     private bool isAlive;
     private bool isMoving;
     private bool isRunning;
     private bool isAttacking;
+    private bool isPlayerInAttackRange;
+
+    // References
+    private Player player;
+    private Transform playerTramsform;
     
     // Start is called before the first frame update
     void Start()
     {
         isAlive = true;
+        initialPoint = transform.position;
+        player = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Player>();
+        playerTramsform = player.transform;
+
     }
 
     // Update is called once per frame
@@ -70,12 +86,29 @@ public class Enemy : MonoBehaviour
 
     private void Patrol()
     {
-        Debug.Log("Patrolling");
+        transform.position 
+            = Vector3.MoveTowards(transform.position, destinationPoint, moveSpeed * Time.deltaTime);
+        if (transform.position == destinationPoint)
+        {
+            Vector3 temp = initialPoint;
+            initialPoint = destinationPoint;
+            destinationPoint = temp;
+            StartCoroutine(StopForSeconds(patrollingWaitBetweenPoints));
+        }
     }
 
     private void SurveillanceAndPatrolling()
     {
-        Debug.Log("Surveillance and Patrolling");
+        transform.position = Vector3.MoveTowards(transform.position, destinationPoint, moveSpeed * Time.deltaTime);
+
+        if (transform.position == destinationPoint)
+        {
+            Vector3 temp = initialPoint;
+            initialPoint = destinationPoint;
+            destinationPoint = temp;
+
+            StartCoroutine(StopForSeconds(Random.Range(patrollingWaitBetweenPoints, maxPatrollingWaitBetweenPoints)));
+        }
     }
 
     private void Static()
@@ -85,12 +118,41 @@ public class Enemy : MonoBehaviour
 
     private void Pursuit()
     {
-        Debug.Log("Pursuit");
+        playerTramsform = player.transform;
+
+        if (isPlayerInAttackRange)
+        {
+            transform.LookAt(playerTramsform);
+            transform.Translate(Vector3.forward * runningSpeed * Time.deltaTime);
+        }
     }
 
     private void PatrollingAndPursuit()
     {
-        Debug.Log("Patrolling and Pursuit");
+        playerTramsform = player.transform;
+        if (isPlayerInAttackRange)
+        {
+            transform.LookAt(playerTramsform);
+            transform.Translate(Vector3.forward * runningSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position 
+                = Vector3.MoveTowards(transform.position, destinationPoint, moveSpeed * Time.deltaTime);
+
+            if (transform.position == destinationPoint)
+            {
+                Vector3 temp = initialPoint;
+                initialPoint = destinationPoint;
+                destinationPoint = temp;
+                StartCoroutine(StopForSeconds(patrollingWaitBetweenPoints));
+            }
+        }
+    }
+    
+    IEnumerator StopForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 }
 
@@ -103,7 +165,6 @@ public enum EnemyType
     Special,
     Boss
 }
-
 public enum MovementConfiguration
 {
     Patrol,
