@@ -29,6 +29,38 @@ public class GameController : MonoBehaviour
     private bool isPlayerAlive;
 
     private Player Player;
+    
+    // Singleton patter
+    private static GameController _instancia;
+    public static GameController Singlenton
+    {
+        get
+        {
+            if (_instancia == null)
+            {
+                _instancia = FindObjectOfType<GameController>();
+                if (_instancia == null)
+                {
+                    GameObject gameObject = new GameObject("GameController");
+                    _instancia = gameObject.AddComponent<GameController>();
+                }
+            }
+
+            return _instancia;
+        }
+    }
+    void Awake()
+    {
+        if (_instancia != null && _instancia != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instancia = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
