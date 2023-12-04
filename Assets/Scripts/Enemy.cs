@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
     private bool isAttacking;
     private bool isAlreadyAttacking;
     private bool isPlayerInAttackRange;
+    private bool isWaiting;
 
     // References
     private Player player;
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isWaiting = false;
         isAlive = true;
         animator.SetBool("isAlive",isAlive);
         initialPoint = transform.position;
@@ -139,7 +141,11 @@ public class Enemy : MonoBehaviour
 
     private void DetermineMovementPattern()
     {
-        Rotate();
+        if (isWaiting)
+        {
+            return;
+        }
+
         switch (movementConfiguration)
         {
             case MovementConfiguration.Patrol:
@@ -286,15 +292,27 @@ public class Enemy : MonoBehaviour
     
     IEnumerator StopForSeconds(float seconds)
     {
+        StopMovement();
+        isWaiting = true;
         yield return new WaitForSeconds(seconds);
-        StopAttack();
+        YRotate();
+        isWaiting = false;
     }
     
     IEnumerator StopAttackingAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        StopAttack();
     }
 
+    private void YRotate()
+    {
+        transform.rotation = Quaternion.Euler(
+            transform.rotation.eulerAngles.x,
+            transform.rotation.eulerAngles.y + 180f,
+            transform.rotation.eulerAngles.z
+        );
+    }
 
 }
 
