@@ -154,6 +154,28 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.transform.tag.Equals("Player"))
+        {
+            if (!isPlayerInAttackRange)
+            {
+                isPlayerInAttackRange = true;
+            }
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.transform.tag.Equals("Player"))
+        {
+            if (isPlayerInAttackRange)
+            {
+                isPlayerInAttackRange = false;
+            }
+        }
+    }
 }
 
 public enum EnemyType
