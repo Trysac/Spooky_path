@@ -177,7 +177,7 @@ public class Enemy : MonoBehaviour
         if (isPlayerInAttackRange)
         {
             StartRunning();
-            transform.LookAt(playerTramsform);
+            transform.LookAt(new Vector3(playerTramsform.position.x,transform.position.y,playerTramsform.position.z));
             transform.Translate(Vector3.forward * runningSpeed * Time.deltaTime);
         }
     }
@@ -188,7 +188,7 @@ public class Enemy : MonoBehaviour
         if (isPlayerInAttackRange)
         {
             StartRunning();
-            transform.LookAt(playerTramsform);
+            transform.LookAt(new Vector3(playerTramsform.position.x,transform.position.y,playerTramsform.position.z));
             transform.Translate(Vector3.forward * runningSpeed * Time.deltaTime);
         }
         else
