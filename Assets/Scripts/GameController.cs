@@ -75,7 +75,6 @@ public class GameController : MonoBehaviour
         if (!Player.IsAlive)
         {
             isPlayerAlive = false;
-            Player.Die();
             LoadGameOver();
         }
     }
@@ -95,6 +94,7 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
+    
 
     // Setters and Getters - Properties
     public int Coins { get => coins; set => coins = value; }

@@ -238,6 +238,11 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            if (!UseMana(effectsManager.Effects[0].Cost))
+            {
+                return;
+            }
+
             InstantiateObjectAtPosition(
                 effectsManager.Effects[0].Vxf, 
                 effectsManager.Effects[0].SpawPoint.position, 
@@ -248,6 +253,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            if (!UseMana(effectsManager.Effects[1].Cost))
+            {
+                return;
+            }
+            
             InstantiateObjectAtPosition(
                 effectsManager.Effects[1].Vxf, 
                 effectsManager.Effects[1].SpawPoint.position, 
@@ -258,6 +268,12 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            
+            if (!UseMana(effectsManager.Effects[2].Cost))
+            {
+                return;
+            }
+            
             InstantiateObjectAtPosition(
                 effectsManager.Effects[2].Vxf, 
                 effectsManager.Effects[2].SpawPoint.position, 
@@ -268,6 +284,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            if (!UseMana(effectsManager.Effects[3].Cost))
+            {
+                return;
+            }
+            
             InstantiateObjectAtPosition(
                 effectsManager.Effects[3].Vxf, 
                 effectsManager.Effects[3].SpawPoint.position, 
@@ -280,6 +301,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
+            if (!UseMana(effectsManager.Effects[4].Cost))
+            {
+                return;
+            }
+            
             InstantiateObjectAtPosition(
                 effectsManager.Effects[4].Vxf, 
                 effectsManager.Effects[4].SpawPoint.position, 
@@ -292,6 +318,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
+            if (!UseMana(effectsManager.Effects[5].Cost))
+            {
+                return;
+            }
+            
             InstantiateObjectAtPosition(
                 effectsManager.Effects[5].Vxf, 
                 effectsManager.Effects[5].SpawPoint.position, 
@@ -302,6 +333,11 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
+            if (!UseMana(effectsManager.Effects[6].Cost))
+            {
+                return;
+            }
+            
             InstantiateObjectAtPosition(
                 effectsManager.Effects[6].Vxf, 
                 effectsManager.Effects[6].SpawPoint.position, 
@@ -365,6 +401,33 @@ public class Player : MonoBehaviour
         animator.SetInteger("EspAttack",0);
     }
 
+    private bool UseMana(int mana)
+    {
+        if (mana > gameController.Mana)
+        {
+            // Play Clip
+            return false;
+        }
+        else
+        {
+            gameController.Mana -= mana;
+            return true;
+        }
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        if (damage >= gameController.Health)
+        {
+            Die();
+        }
+        else
+        {
+            gameController.Health -= damage;
+        }
+    }
+    
+    
     /// ////////////////////////////////
     // Setters and Getters for Player states - Properties
     /// ////////////////////////////////

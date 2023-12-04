@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EffectsManager : MonoBehaviour
 {
+    [Header("VFX and SFX")] 
     [SerializeField] EspecialAttack[] effects;
     [SerializeField] private AudioSource mainSound;
     [SerializeField] private AudioSource secondaySound;
@@ -25,7 +26,8 @@ public class EspecialAttack
     [SerializeField] Transform spawPoint;
     [SerializeField] float duration = 2f;
     [SerializeField] int damage = 10;
-
+    [SerializeField] int cost = 10;
+    
     public string Name { get => name;}
     public GameObject Vxf { get => vxf; set => vxf = value; }
     public AudioClip EffectSound { get => effectSound; set => effectSound = value; }
@@ -34,4 +36,5 @@ public class EspecialAttack
     public Transform SpawPoint { get => spawPoint; set => spawPoint = value; }
     public float Duration { get => duration; set => duration = value; }
     public int Damage { get => damage; set => damage = value; }
+    public int Cost { get => cost; set => cost = value; }
 }
