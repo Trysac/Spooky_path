@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
     
     [Header("Load Scenes Configuration")] 
     [SerializeField] float delayBeforeLoad = 3f;
-    
+    [SerializeField] private AudioSource audioSource;
 
     
     // General Flags
@@ -72,7 +72,8 @@ public class GameController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
+        CheckIfGameOver();
         if (!Player.IsAlive)
         {
             isPlayerAlive = false;
@@ -80,9 +81,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void CheckIfGameOver()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex.Equals(8))
+        {
+            audioSource.Stop();
+        }
+    }
+
     public void LoadGameOver()
     {
-        StartCoroutine(LoadSceneWithDelay(0, 7));
+        StartCoroutine(LoadSceneWithDelay(0, 8));
     }
     
     IEnumerator LoadSceneWithDelay(int clipPositionInArray, int sceneIndex)
