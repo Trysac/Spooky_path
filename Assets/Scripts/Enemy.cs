@@ -33,6 +33,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform model3D;
     [SerializeField] Rigidbody rigidbody;
     
+    [Header("Effects")] 
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip sounds;
+    
     // Control variables
     private bool isAlive;
     private bool isAlreadyDead;
@@ -282,6 +286,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        source.clip = sounds;
+        source.Play();
         if (health <= damage)
         {
             Die();

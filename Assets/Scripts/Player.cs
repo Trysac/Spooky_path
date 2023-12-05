@@ -24,6 +24,12 @@ public class Player : MonoBehaviour
     [SerializeField] Transform model3D;
     [SerializeField] EffectsManager effectsManager;
     
+    [Header("Effects")] 
+    [SerializeField] GameObject damageEffect;
+    [SerializeField] GameObject deadEffect;
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip[] sounds;
+    
     private bool isAlive;
     private bool isAlreadyDead;
     
@@ -384,6 +390,21 @@ public class Player : MonoBehaviour
         }
     }
     
+    private void InstantiateObjectAtPosition()
+    { 
+        GameObject instantiatedObject = Instantiate(damageEffect, transform.position, transform.rotation);
+        instantiatedObject.SetActive(true);
+        instantiatedObject.GetComponent<SelfDestroy>().DestroyWithDelay(1);
+        instantiatedObject.transform.parent = transform;
+    }
+    
+    private void InstantiateDeadObjectAtPosition()
+    { 
+        GameObject instantiatedObject = Instantiate(deadEffect, transform.position, transform.rotation);
+        instantiatedObject.SetActive(true);
+        instantiatedObject.transform.parent = transform;
+    }
+    
     // Set all moving variables to false
     private void StopMovement()
     {
@@ -406,9 +427,9 @@ public class Player : MonoBehaviour
             isAlreadyDead = true; 
             isAlive = false;
             StopMovement();
-            // AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-            // audioSource.clip = deathSound;
-            // audioSource.Play();
+            InstantiateDeadObjectAtPosition();
+            source.clip = sounds[1];
+            source.Play();
             animator.SetBool("isAlive",isAlive);
         }
     }
@@ -446,7 +467,10 @@ public class Player : MonoBehaviour
         }
         else
         {
+            source.clip = sounds[0];
+            source.Play();
             gameController.Health -= damage;
+            InstantiateObjectAtPosition();
         }
     }
     

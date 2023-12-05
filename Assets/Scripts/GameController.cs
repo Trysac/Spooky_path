@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     
     [Header("Load Scenes Configuration")] 
     [SerializeField] float delayBeforeLoad = 3f;
+    
 
     
     // General Flags
