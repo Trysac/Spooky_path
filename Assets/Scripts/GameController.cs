@@ -74,10 +74,10 @@ public class GameController : MonoBehaviour
     void Update()
     {
         CheckIfGameOver();
-        if (!Player.IsAlive)
+        if (Player != null && !Player.IsAlive)
         {
             isPlayerAlive = false;
-            LoadGameOver();
+            StartCoroutine(LoadSceneWithDelay(8));
         }
     }
 
@@ -89,13 +89,8 @@ public class GameController : MonoBehaviour
             audioSource.Stop();
         }
     }
-
-    public void LoadGameOver()
-    {
-        StartCoroutine(LoadSceneWithDelay(0, 8));
-    }
     
-    IEnumerator LoadSceneWithDelay(int clipPositionInArray, int sceneIndex)
+    IEnumerator LoadSceneWithDelay(int sceneIndex)
     {
         yield return new WaitForSeconds(delayBeforeLoad);
         LoadScene(sceneIndex);
@@ -104,6 +99,7 @@ public class GameController : MonoBehaviour
     void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+        StopAllCoroutines();
     }
     
 
