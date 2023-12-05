@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
     private bool isAttacking;
     private bool isAlreadyAttacking;
 
+    private bool isDefenseShieldActivate;
+
     GameController gameController;
 
     // Start is called before the first frame update
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
     {
         isAlive = true;
         isAlreadyDead = false;
+        isDefenseShieldActivate = false;
         animator.SetBool("isAlive",isAlive);
         isOnTheGround = true;
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
@@ -53,6 +57,11 @@ public class Player : MonoBehaviour
     {
         if (isAlive)
         {
+            if (isDefenseShieldActivate)
+            {
+                StartCoroutine(Deactivatedefense());
+            }
+
             checkAttack();
             Move();
             IncreaseStamina();
@@ -330,6 +339,14 @@ public class Player : MonoBehaviour
                 effectsManager.Effects[5].Duration);
             effectsManager.MainSound.clip = effectsManager.Effects[5].EffectSound;
             effectsManager.MainSound.Play();
+            if (gameController.Health + 40 > gameController.MaxHealth)
+            {
+                gameController.Health = gameController.MaxHealth;
+            }
+            else
+            {
+                gameController.Health += 40;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
@@ -347,6 +364,7 @@ public class Player : MonoBehaviour
             effectsManager.SecondaySound.clip = effectsManager.Effects[6].SecondaryEffectSound;
             effectsManager.MainSound.Play();
             effectsManager.SecondaySound.Play();
+            
         }
     }
     
@@ -417,6 +435,11 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
+        if (isDefenseShieldActivate)
+        {
+            return;
+        }
+
         if (damage >= gameController.Health)
         {
             Die();
@@ -425,6 +448,12 @@ public class Player : MonoBehaviour
         {
             gameController.Health -= damage;
         }
+    }
+    
+    IEnumerator Deactivatedefense()
+    {
+        yield return new WaitForSeconds(5f);
+        isDefenseShieldActivate = false;
     }
     
     

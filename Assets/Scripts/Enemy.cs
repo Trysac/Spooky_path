@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
     private bool isAlreadyAttacking;
     private bool isPlayerInAttackRange;
     private bool isWaiting;
+    private bool hasTakenDamage;
 
     // References
     private Player player;
@@ -52,6 +53,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         isWaiting = false;
+        hasTakenDamage = false;
         isAlive = true;
         animator.SetBool("isAlive",isAlive);
         initialPoint = transform.position;
@@ -245,22 +247,6 @@ public class Enemy : MonoBehaviour
         DetermineMovementPattern();
     }
     
-    public void Die()
-    {
-        if (!isAlreadyDead)
-        {
-            isAlreadyDead = true; 
-            isAlive = false;
-            StopMovement();
-            gameController.GeneralScore += scoreValue;
-            animator.SetBool("isAlive", isAlive);
-            // AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-            // audioSource.clip = deathSound;
-            // audioSource.Play();
-            Destroy(gameObject, delayToDestroy);
-        }
-    }
-    
     IEnumerator StopForSeconds(float seconds)
     {
         StopMovement();
@@ -294,6 +280,43 @@ public class Enemy : MonoBehaviour
         );
     }
 
+    public void TakeDamage(int damage)
+    {
+        if (health <= damage)
+        {
+            Die();
+        }
+        else
+        {
+            health -= damage; 
+            StartCoroutine(TakeDamageOne());
+        }
+    }
+
+    IEnumerator TakeDamageOne()
+    {
+        hasTakenDamage = true;
+        yield return new WaitForSeconds(1f);
+        hasTakenDamage = false;
+    }
+
+    public void Die()
+    {
+        if (!isAlreadyDead)
+        {
+            isAlreadyDead = true; 
+            isAlive = false;
+            StopMovement();
+            isAttacking = false;
+            animator.SetBool("isAttacking",isAttacking);
+            animator.SetBool("isAlive", isAlive);
+            gameController.GeneralScore += scoreValue;
+            // AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            // audioSource.clip = deathSound;
+            // audioSource.Play();
+            Destroy(gameObject, delayToDestroy);
+        }
+    }
 }
 
 public enum EnemyType
