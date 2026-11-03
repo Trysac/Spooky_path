@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         {
             if (_instancia == null)
             {
-                _instancia = FindObjectOfType<GameController>();
+                _instancia = FindFirstObjectByType<GameController>();
                 if (_instancia == null)
                 {
                     GameObject gameObject = new GameObject("GameController");
