@@ -70,3 +70,11 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Per-IDE and generated editor files
+.idea/
+.vscode/
+*.slnx
+
+# Python bytecode from tools/
+__pycache__/
