@@ -17,6 +17,7 @@ solving locks, levers and pressure plates on the way.
 
 - **In your browser:** [trysac.github.io/Spooky_path](https://trysac.github.io/Spooky_path/)
   (published from the GitHub Actions workflow).
+- **On itch.io:** [trysac.itch.io/spooky-path](https://trysac.itch.io/spooky-path)
 - **Get the code:** fork this repository, or clone it:
 
   ```bash
