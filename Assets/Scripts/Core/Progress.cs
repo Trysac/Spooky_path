@@ -46,13 +46,18 @@ namespace SpookyPath.Core
         /// <summary>Whole seconds finished under par (never negative).</summary>
         public int SecondsUnderPar => Math.Max(0, (int)Math.Floor(ParSeconds - Elapsed));
 
-        public int Score =>
+        /// <summary>Points from loot, kills and the artefact: what the HUD shows while playing.</summary>
+        public int LootScore =>
             Coins * Tuning.CoinScore +
             Candy * Tuning.CandyScore +
             Relics * Tuning.RelicScore +
             KillScore +
-            (ArtefactDestroyed ? Tuning.ArtefactScore : 0) +
-            SecondsUnderPar * Tuning.ParSecondScore;
+            (ArtefactDestroyed ? Tuning.ArtefactScore : 0);
+
+        /// <summary>Points for the seconds left under par, added when the level is finished.</summary>
+        public int TimeBonus => SecondsUnderPar * Tuning.ParSecondScore;
+
+        public int Score => LootScore + TimeBonus;
     }
 
     /// <summary>

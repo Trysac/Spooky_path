@@ -24,6 +24,18 @@ namespace SpookyPath.Core.Tests
         }
 
         [Test]
+        public void The_loot_score_leaves_out_the_time_bonus_that_shrinks_while_playing()
+        {
+            var run = new LevelRun(0, 90f);
+            run.AddCoin();
+            run.Tick(10f);
+
+            Assert.AreEqual(Tuning.CoinScore, run.LootScore);
+            Assert.AreEqual(80 * Tuning.ParSecondScore, run.TimeBonus);
+            Assert.AreEqual(run.LootScore + run.TimeBonus, run.Score);
+        }
+
+        [Test]
         public void Finishing_over_par_earns_no_time_bonus()
         {
             var run = new LevelRun(0, 30f);
