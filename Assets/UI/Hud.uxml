@@ -1,0 +1,150 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="Hud.uss" />
+    <ui:VisualElement name="root" class="root" picking-mode="Ignore">
+        <ui:VisualElement name="hurt" class="hurt" picking-mode="Ignore" />
+
+        <ui:VisualElement name="play-hud" class="play-hud" picking-mode="Ignore">
+            <ui:VisualElement class="vitals" picking-mode="Ignore">
+                <ui:VisualElement class="bar bar--health" picking-mode="Ignore">
+                    <ui:VisualElement name="health-fill" class="bar__fill" picking-mode="Ignore" />
+                    <ui:Label name="health-text" class="bar__text" text="100 / 100" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:VisualElement class="bar bar--mana" picking-mode="Ignore">
+                    <ui:VisualElement name="mana-fill" class="bar__fill" picking-mode="Ignore" />
+                    <ui:Label name="mana-text" class="bar__text" text="100 / 100" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:VisualElement class="bar bar--stamina" picking-mode="Ignore">
+                    <ui:VisualElement name="stamina-fill" class="bar__fill" picking-mode="Ignore" />
+                    <ui:Label name="stamina-text" class="bar__text" text="100 / 100" picking-mode="Ignore" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="info" picking-mode="Ignore">
+                <ui:Label name="level-name" class="info__level" text="The Crypt Gate" picking-mode="Ignore" />
+                <ui:Label name="timer" class="info__timer" text="0:00.0" picking-mode="Ignore" />
+                <ui:VisualElement class="info__loot" picking-mode="Ignore">
+                    <ui:Label name="coins" class="loot loot--coins" text="0" picking-mode="Ignore" />
+                    <ui:Label name="candy" class="loot loot--candy" text="0" picking-mode="Ignore" />
+                    <ui:Label name="keys" class="loot loot--keys" text="0" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:Label name="score" class="info__score" text="0" picking-mode="Ignore" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="boss" class="boss" picking-mode="Ignore">
+                <ui:Label name="boss-name" class="boss__name" text="THE ARTEFACT" picking-mode="Ignore" />
+                <ui:VisualElement class="boss__bar" picking-mode="Ignore">
+                    <ui:VisualElement name="boss-fill" class="boss__fill" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:Label name="boss-status" class="boss__status" text="Warded: 3 braziers burn" picking-mode="Ignore" />
+            </ui:VisualElement>
+
+            <ui:Label name="objective" class="objective" text="" picking-mode="Ignore" />
+
+            <ui:VisualElement name="spells" class="spells" picking-mode="Ignore">
+                <ui:VisualElement name="spell-0" class="spell spell--fire" picking-mode="Ignore">
+                    <ui:VisualElement class="spell__cooldown" picking-mode="Ignore" />
+                    <ui:Label class="spell__key" text="1" picking-mode="Ignore" />
+                    <ui:Label class="spell__name" text="Firebolt" picking-mode="Ignore" />
+                    <ui:Label class="spell__cost" text="12" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:VisualElement name="spell-1" class="spell spell--frost" picking-mode="Ignore">
+                    <ui:VisualElement class="spell__cooldown" picking-mode="Ignore" />
+                    <ui:Label class="spell__key" text="2" picking-mode="Ignore" />
+                    <ui:Label class="spell__name" text="Frost Nova" picking-mode="Ignore" />
+                    <ui:Label class="spell__cost" text="30" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:VisualElement name="spell-2" class="spell spell--heal" picking-mode="Ignore">
+                    <ui:VisualElement class="spell__cooldown" picking-mode="Ignore" />
+                    <ui:Label class="spell__key" text="3" picking-mode="Ignore" />
+                    <ui:Label class="spell__name" text="Mend" picking-mode="Ignore" />
+                    <ui:Label class="spell__cost" text="35" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:VisualElement name="spell-3" class="spell spell--ward" picking-mode="Ignore">
+                    <ui:VisualElement class="spell__cooldown" picking-mode="Ignore" />
+                    <ui:Label class="spell__key" text="4" picking-mode="Ignore" />
+                    <ui:Label class="spell__name" text="Bone Ward" picking-mode="Ignore" />
+                    <ui:Label class="spell__cost" text="25" picking-mode="Ignore" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:Label name="prompt" class="prompt" text="E  Pull the lever" picking-mode="Ignore" />
+            <ui:Label name="sign" class="sign" text="" picking-mode="Ignore" />
+            <ui:Button name="pause-button" class="pause-button" text="II" />
+        </ui:VisualElement>
+
+        <ui:Label name="banner" class="banner" text="" picking-mode="Ignore" />
+        <ui:Label name="toast" class="toast" text="" picking-mode="Ignore" />
+
+        <ui:VisualElement name="title" class="screen screen--title" picking-mode="Ignore">
+            <ui:Label class="title__logo" text="Spooky Path" picking-mode="Ignore" />
+            <ui:Label class="title__tagline" text="Descend the darkest dungeon. Destroy the artefact." picking-mode="Ignore" />
+            <ui:VisualElement name="title-menu" class="menu" picking-mode="Ignore">
+                <ui:Button name="play-button" class="menu__button" text="New descent" />
+                <ui:Button name="levels-button" class="menu__button" text="Choose level" />
+                <ui:Button name="settings-button" class="menu__button" text="Settings" />
+                <ui:Button name="quit-button" class="menu__button" text="Quit" />
+            </ui:VisualElement>
+            <ui:Label name="title-best" class="title__best" text="" picking-mode="Ignore" />
+            <ui:Label class="title__controls" text="WASD move · Shift sprint · Space jump · Click strike · 1-4 spells · E use · Esc pause   |   Gamepad supported" picking-mode="Ignore" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="levels" class="screen screen--panel" picking-mode="Ignore">
+            <ui:VisualElement class="panel" picking-mode="Ignore">
+                <ui:Label class="panel__title" text="Choose a level" picking-mode="Ignore" />
+                <ui:VisualElement name="levels-menu" class="menu" picking-mode="Ignore">
+                    <ui:Button name="level-0" class="menu__button menu__button--level" text="Level" />
+                    <ui:Button name="level-1" class="menu__button menu__button--level" text="Level" />
+                    <ui:Button name="level-2" class="menu__button menu__button--level" text="Level" />
+                    <ui:Button name="level-3" class="menu__button menu__button--level" text="Level" />
+                    <ui:Button name="levels-back" class="menu__button" text="Back" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="pause" class="screen screen--panel" picking-mode="Ignore">
+            <ui:VisualElement class="panel" picking-mode="Ignore">
+                <ui:Label class="panel__title" text="Paused" picking-mode="Ignore" />
+                <ui:VisualElement name="pause-menu" class="menu" picking-mode="Ignore">
+                    <ui:Button name="resume-button" class="menu__button" text="Resume" />
+                    <ui:Button name="restart-button" class="menu__button" text="Restart level" />
+                    <ui:Button name="pause-settings-button" class="menu__button" text="Settings" />
+                    <ui:Button name="pause-title-button" class="menu__button" text="Quit to title" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="settings" class="screen screen--panel" picking-mode="Ignore">
+            <ui:VisualElement class="panel" picking-mode="Ignore">
+                <ui:Label class="panel__title" text="Settings" picking-mode="Ignore" />
+                <ui:VisualElement name="settings-menu" class="menu" picking-mode="Ignore">
+                    <ui:Button name="music-button" class="menu__button menu__button--slider" text="Music  70%" />
+                    <ui:Button name="effects-button" class="menu__button menu__button--slider" text="Effects  90%" />
+                    <ui:Button name="settings-back" class="menu__button" text="Back" />
+                </ui:VisualElement>
+                <ui:Label class="panel__hint" text="Left / right (or click) to change the volume" picking-mode="Ignore" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="results" class="screen screen--panel" picking-mode="Ignore">
+            <ui:VisualElement class="panel panel--wide" picking-mode="Ignore">
+                <ui:Label name="result-title" class="panel__title" text="Level complete" picking-mode="Ignore" />
+                <ui:Label name="result-subtitle" class="panel__subtitle" text="" picking-mode="Ignore" />
+                <ui:VisualElement class="stats" picking-mode="Ignore">
+                    <ui:Label name="result-time" class="stat" text="" picking-mode="Ignore" />
+                    <ui:Label name="result-best" class="stat" text="" picking-mode="Ignore" />
+                    <ui:Label name="result-loot" class="stat" text="" picking-mode="Ignore" />
+                    <ui:Label name="result-kills" class="stat" text="" picking-mode="Ignore" />
+                    <ui:Label name="result-score" class="stat stat--score" text="" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:Label name="result-record" class="panel__record" text="" picking-mode="Ignore" />
+                <ui:VisualElement name="results-menu" class="menu menu--row" picking-mode="Ignore">
+                    <ui:Button name="result-next" class="menu__button" text="Next level" />
+                    <ui:Button name="result-retry" class="menu__button" text="Retry" />
+                    <ui:Button name="result-title-button" class="menu__button" text="Title" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="fade" class="fade" picking-mode="Ignore" />
+    </ui:VisualElement>
+</ui:UXML>

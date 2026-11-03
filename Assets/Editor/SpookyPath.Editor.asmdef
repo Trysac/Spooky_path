@@ -1,0 +1,19 @@
+{
+    "name": "SpookyPath.Editor",
+    "rootNamespace": "SpookyPath.EditorTools",
+    "references": [
+        "SpookyPath.Core",
+        "SpookyPath.Game"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

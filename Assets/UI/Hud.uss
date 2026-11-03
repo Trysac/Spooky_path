@@ -1,0 +1,477 @@
+/* Spooky Path HUD and menus. Palette: night #0d0a14, bone #efe6cf, ember #ff9a3d, curse #b46bff, ectoplasm #7dffb0. */
+
+.root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: rgb(239, 230, 207);
+    font-size: 18px;
+}
+
+.hurt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-width: 70px;
+    border-color: rgba(190, 20, 30, 0.55);
+    opacity: 0;
+}
+
+.fade {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(8, 5, 12);
+    opacity: 0;
+}
+
+.play-hud {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ---- Vitals ---- */
+
+.vitals {
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    width: 300px;
+}
+
+.bar {
+    height: 22px;
+    margin-bottom: 7px;
+    background-color: rgba(10, 6, 16, 0.78);
+    border-width: 2px;
+    border-color: rgba(239, 230, 207, 0.35);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.bar__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.bar--health .bar__fill { background-color: rgb(196, 38, 52); }
+.bar--mana .bar__fill { background-color: rgb(64, 110, 230); }
+.bar--stamina .bar__fill { background-color: rgb(80, 196, 110); }
+.bar--exhausted .bar__fill { background-color: rgb(120, 120, 110); }
+
+.bar__text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    -unity-text-align: middle-center;
+    font-size: 13px;
+    -unity-font-style: bold;
+    color: rgb(255, 250, 236);
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+}
+
+/* ---- Level info ---- */
+
+.info {
+    position: absolute;
+    right: 24px;
+    top: 16px;
+    align-items: flex-end;
+}
+
+.info__level {
+    -unity-font: url("Fonts/Creepster-Regular.ttf");
+    -unity-font-definition: initial;
+    font-size: 30px;
+    color: rgb(255, 154, 61);
+    text-shadow: 2px 2px 0 rgb(0, 0, 0);
+}
+
+.info__timer {
+    font-size: 22px;
+    -unity-font-style: bold;
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+}
+
+.info__loot {
+    flex-direction: row;
+    margin-top: 2px;
+}
+
+.loot {
+    margin-left: 14px;
+    font-size: 18px;
+    -unity-font-style: bold;
+    padding-left: 22px;
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+}
+
+.loot--coins { color: rgb(255, 214, 92); }
+.loot--candy { color: rgb(255, 150, 60); }
+.loot--keys { color: rgb(200, 220, 255); }
+
+.info__score {
+    font-size: 16px;
+    color: rgba(239, 230, 207, 0.8);
+}
+
+/* ---- Artefact bar ---- */
+
+.boss {
+    position: absolute;
+    top: 18px;
+    left: 360px;
+    right: 360px;
+    align-items: center;
+    display: none;
+}
+
+.boss__name {
+    -unity-font: url("Fonts/Creepster-Regular.ttf");
+    -unity-font-definition: initial;
+    font-size: 26px;
+    color: rgb(214, 120, 255);
+    text-shadow: 2px 2px 0 rgb(0, 0, 0);
+}
+
+.boss__bar {
+    width: 100%;
+    height: 16px;
+    background-color: rgba(10, 6, 16, 0.8);
+    border-width: 2px;
+    border-color: rgba(214, 120, 255, 0.6);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.boss__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(170, 40, 220);
+}
+
+.boss__fill--shielded { background-color: rgb(90, 70, 120); }
+
+.boss__status {
+    font-size: 15px;
+    margin-top: 3px;
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+}
+
+.objective {
+    position: absolute;
+    left: 24px;
+    top: 112px;
+    font-size: 15px;
+    color: rgba(239, 230, 207, 0.85);
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+}
+
+/* ---- Spells ---- */
+
+.spells {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.spell {
+    width: 116px;
+    height: 70px;
+    margin: 0 5px;
+    background-color: rgba(12, 8, 20, 0.82);
+    border-width: 2px;
+    border-radius: 8px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 13px;
+}
+
+.spell--fire { border-color: rgb(255, 138, 42); }
+.spell--frost { border-color: rgb(120, 210, 255); }
+.spell--heal { border-color: rgb(125, 255, 176); }
+.spell--ward { border-color: rgb(239, 230, 207); }
+
+.spell--unaffordable { opacity: 0.45; }
+
+.spell__cooldown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+.spell__key {
+    position: absolute;
+    left: 6px;
+    top: 1px;
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 92);
+}
+
+.spell__name {
+    font-size: 14px;
+    -unity-font-style: bold;
+    margin-top: 0;
+}
+
+.spell__cost {
+    font-size: 12px;
+    color: rgb(140, 170, 255);
+}
+
+/* ---- Prompts ---- */
+
+.prompt {
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    -unity-text-align: middle-center;
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(255, 230, 160);
+    text-shadow: 2px 2px 0 rgb(0, 0, 0);
+    display: none;
+}
+
+.sign {
+    position: absolute;
+    bottom: 136px;
+    left: 300px;
+    right: 300px;
+    padding: 12px 18px;
+    background-color: rgba(14, 9, 22, 0.88);
+    border-width: 2px;
+    border-color: rgba(180, 107, 255, 0.7);
+    border-radius: 8px;
+    font-size: 17px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+    display: none;
+}
+
+.pause-button {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: rgb(239, 230, 207);
+    background-color: rgba(12, 8, 20, 0.8);
+    border-width: 2px;
+    border-color: rgba(239, 230, 207, 0.4);
+    border-radius: 8px;
+}
+
+.banner {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    right: 0;
+    -unity-text-align: middle-center;
+    -unity-font: url("Fonts/Creepster-Regular.ttf");
+    -unity-font-definition: initial;
+    font-size: 64px;
+    color: rgb(255, 154, 61);
+    text-shadow: 4px 4px 0 rgb(0, 0, 0);
+    white-space: normal;
+    opacity: 0;
+}
+
+.toast {
+    position: absolute;
+    top: 290px;
+    left: 0;
+    right: 0;
+    -unity-text-align: middle-center;
+    font-size: 20px;
+    -unity-font-style: bold;
+    text-shadow: 2px 2px 0 rgb(0, 0, 0);
+    opacity: 0;
+}
+
+/* ---- Screens ---- */
+
+.screen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.screen--title {
+    background-color: rgba(8, 5, 12, 0.35);
+}
+
+.screen--panel {
+    background-color: rgba(8, 5, 12, 0.72);
+}
+
+.title__logo {
+    -unity-font: url("Fonts/Creepster-Regular.ttf");
+    -unity-font-definition: initial;
+    font-size: 120px;
+    color: rgb(255, 154, 61);
+    text-shadow: 5px 6px 0 rgb(40, 0, 60);
+    margin-bottom: 0;
+}
+
+.title__tagline {
+    font-size: 20px;
+    margin-bottom: 26px;
+    color: rgb(239, 230, 207);
+    text-shadow: 2px 2px 0 rgb(0, 0, 0);
+}
+
+.title__best {
+    margin-top: 16px;
+    font-size: 16px;
+    color: rgb(255, 214, 92);
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+}
+
+.title__controls {
+    position: absolute;
+    bottom: 22px;
+    font-size: 14px;
+    color: rgba(239, 230, 207, 0.75);
+    text-shadow: 1px 1px 0 rgb(0, 0, 0);
+}
+
+.menu {
+    align-items: stretch;
+    width: 340px;
+}
+
+.menu--row {
+    flex-direction: row;
+    width: auto;
+    justify-content: center;
+}
+
+.menu--row .menu__button {
+    width: 170px;
+    margin: 0 6px;
+}
+
+.menu__button {
+    height: 46px;
+    margin: 5px 0;
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(239, 230, 207);
+    background-color: rgba(28, 18, 40, 0.92);
+    border-width: 2px;
+    border-color: rgba(239, 230, 207, 0.25);
+    border-radius: 8px;
+    transition-duration: 0.12s;
+}
+
+.menu__button--level {
+    -unity-text-align: middle-left;
+    padding-left: 18px;
+    font-size: 17px;
+}
+
+.menu__button--selected {
+    background-color: rgba(120, 52, 150, 0.95);
+    border-color: rgb(255, 154, 61);
+    color: rgb(255, 250, 236);
+    scale: 1.04 1.04;
+}
+
+.menu__button--locked {
+    color: rgba(239, 230, 207, 0.35);
+}
+
+.panel {
+    padding: 28px 36px;
+    background-color: rgba(18, 11, 28, 0.95);
+    border-width: 3px;
+    border-color: rgba(180, 107, 255, 0.6);
+    border-radius: 14px;
+    align-items: center;
+    min-width: 420px;
+}
+
+.panel--wide {
+    min-width: 620px;
+}
+
+.panel__title {
+    -unity-font: url("Fonts/Creepster-Regular.ttf");
+    -unity-font-definition: initial;
+    font-size: 52px;
+    color: rgb(255, 154, 61);
+    text-shadow: 3px 3px 0 rgb(0, 0, 0);
+    margin-bottom: 8px;
+}
+
+.panel__subtitle {
+    font-size: 17px;
+    margin-bottom: 12px;
+    white-space: normal;
+    max-width: 560px;
+    -unity-text-align: middle-center;
+}
+
+.panel__hint {
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(239, 230, 207, 0.7);
+}
+
+.panel__record {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(125, 255, 176);
+    margin: 6px 0 14px 0;
+}
+
+.stats {
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.stat {
+    font-size: 19px;
+    margin: 2px 0;
+}
+
+.stat--score {
+    font-size: 26px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 92);
+    margin-top: 8px;
+}

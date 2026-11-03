@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec408a145921494c81a8e3469f123d9, type: 3}
+  m_Name: GameArt
+  m_EditorClassIdentifier: SpookyPath.Game::SpookyPath.Game.GameArt
+  Explorer: {fileID: 919132149155446097, guid: a538caa4a21e3df459dec760e639df63, type: 3}
+  ExplorerAnimator: {fileID: 9100000, guid: 18ca205910216b64c81e4cbde432858f, type: 2}
+  Skeletons:
+  - {fileID: 919132149155446097, guid: 978bb349079d73f489539cc30be6e071, type: 3}
+  - {fileID: 919132149155446097, guid: eb7e7e5dc3ac43740a56ae224d631a0e, type: 3}
+  - {fileID: 919132149155446097, guid: 2e3ca0ec1793df348931373f614c7149, type: 3}
+  BrokenSkeletons:
+  - {fileID: 919132149155446097, guid: d85d2e3c1d71e3a48af4168df60b7e06, type: 3}
+  - {fileID: 919132149155446097, guid: ea751d34c3f3d0342a6acdbf5cd48fc8, type: 3}
+  - {fileID: 919132149155446097, guid: 6b48f8449b442a946890268782267203, type: 3}
+  Floor: {fileID: 919132149155446097, guid: f273f98e1ae619e4b9f2b575a79acd4b, type: 3}
+  FloorCracked: {fileID: 919132149155446097, guid: 20c5563ad2428934a8243939a8b581db, type: 3}
+  Foundation: {fileID: 919132149155446097, guid: ab12482e8322b8a4590144f0d98e3335, type: 3}
+  Wall: {fileID: 919132149155446097, guid: dc3e7b05bcbc96249bb34fc5d1329e50, type: 3}
+  WallCracked: {fileID: 919132149155446097, guid: 85aabdbb092b1984a90ae9d0130f8ccc, type: 3}
+  WallArched: {fileID: 919132149155446097, guid: 236514a87a69a5b45bcda8c86d2c957e, type: 3}
+  TorchMounted: {fileID: 919132149155446097, guid: a9f141693daa5344c8721c7e8cf5abd4, type: 3}
+  Stairs: {fileID: 919132149155446097, guid: d6b3d2cc3b7398548bd73bca422bb806, type: 3}
+  DoorLeaf: {fileID: 919132149155446097, guid: 6f0e45d315dc6aa4ea67119b12cf16ba, type: 3}
+  GateLeaf: {fileID: 919132149155446097, guid: 8afc14222c88dab4485bdff2c1b85e08, type: 3}
+  Grate: {fileID: 919132149155446097, guid: 43faa4fcd584706488cc140a19e483fe, type: 3}
+  Spikes: {fileID: 919132149155446097, guid: 1a33cb4a51bdae842a5b104d2e980ea5, type: 3}
+  Arch: {fileID: 919132149155446097, guid: 5bc622fb811bfa34d905bc45b81e9aef, type: 3}
+  Gravestone: {fileID: 919132149155446097, guid: baa9e322bbc4ebd48b46094b735d1f34, type: 3}
+  Shrine: {fileID: 919132149155446097, guid: 2ad9ceb6f8906f641b8f2041026593f6, type: 3}
+  ArtefactModel: {fileID: 919132149155446097, guid: c397d9b796803c74897aa9f4e3a4eeae, type: 3}
+  Props:
+  - {fileID: 919132149155446097, guid: ed79e9b9062f00a4c8e2b0f8433f9b66, type: 3}
+  - {fileID: 919132149155446097, guid: 794f49d39bb89bb48b0c387f9f9b32d3, type: 3}
+  - {fileID: 919132149155446097, guid: c458fd9fe188e714da43ffef817465e6, type: 3}
+  - {fileID: 919132149155446097, guid: 068346988c74fc740831b3e3a217d0ac, type: 3}
+  - {fileID: 919132149155446097, guid: 3c5dc204b1bbec64b87f6dfddb31c69f, type: 3}
+  - {fileID: 919132149155446097, guid: cbc12e85d218c65488156aede1cfa333, type: 3}
+  - {fileID: 919132149155446097, guid: 64317347f4d704246ad8a9fca490afa9, type: 3}
+  - {fileID: 919132149155446097, guid: adf240e4f2529ec49ab962558e0ebcf6, type: 3}
+  - {fileID: 919132149155446097, guid: a96d7f7e812fed849be25d3fa652eb67, type: 3}
+  - {fileID: 919132149155446097, guid: a820a89d58546fe4d83eefb2f1684002, type: 3}
+  Coin: {fileID: 919132149155446097, guid: 4b16d1ea9739f9447a299d0a2f300b13, type: 3}
+  Candy: {fileID: 919132149155446097, guid: 4ca9d25f1ca1e3b4e8c1d977c258c1a9, type: 3}
+  Key: {fileID: 919132149155446097, guid: 4715f65918b7659458fec8eca78e201e, type: 3}
+  Chest: {fileID: 919132149155446097, guid: 473d55d7206a5b14f9392ae32a52242d, type: 3}
+  Potions:
+  - {fileID: 919132149155446097, guid: 596671b46a2f977479a42612743a7c5a, type: 3}
+  - {fileID: 919132149155446097, guid: 98e33c31b895deb44bb120553064c735, type: 3}
+  - {fileID: 919132149155446097, guid: d52a0562d0260da4b8c882ac2e797266, type: 3}
+  - {fileID: 919132149155446097, guid: b5830910a722c8e4a9194e3b52d41f9d, type: 3}
+  Lava: {fileID: 2100000, guid: b061a13b1ab03cc4d94beb2dd563211a, type: 2}
+  Rock: {fileID: 2100000, guid: ce7bcc2cb29b2084e8f4a5d01dfe024a, type: 2}
+  Stone: {fileID: 2100000, guid: 4e031c33f57938d498699e3a4b5231e1, type: 2}
+  Iron: {fileID: 2100000, guid: d8efed64986113442bf5abe89d3b5ca0, type: 2}
+  Rune: {fileID: 2100000, guid: c34f1e7fceac7c64aaafb47f1c48a457, type: 2}
+  RuneLit: {fileID: 2100000, guid: 2fcb42d2eda63a248b150bb8e5d0029a, type: 2}
+  Ember: {fileID: 2100000, guid: 6bad3ba79722e6642872ca9d9f24a935, type: 2}
+  Curse: {fileID: 2100000, guid: 1c9c1c6853226b347be2b0091c43af97, type: 2}
+  ShieldBubble: {fileID: 2100000, guid: 0d37a08555b50cc429bc371a0b432ae2, type: 2}
+  DarkAura: {fileID: 2100000, guid: 2c45a401004dc4d4daf1365cc605d9e2, type: 2}
+  ParticleAdditive: {fileID: 2100000, guid: 2a4dda710d0f3e34cb9d8d3206f00a05, type: 2}
+  ParticleAlpha: {fileID: 2100000, guid: db34038d37e5ef9409426fb57dbaaec6, type: 2}
+  BlobShadow: {fileID: 2100000, guid: 2852ae8f02168f9439e601c28c6e7c1f, type: 2}
+  Cube: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  Sphere: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  Cylinder: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  Quad: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  TitleMusic: {fileID: 8300000, guid: 1acea08d31ed4d74c8f9deba7282181f, type: 3}
+  DungeonMusic: {fileID: 8300000, guid: 4e4f47bcfaddaac489cc8e7bdde56ceb, type: 3}
+  FinalMusic: {fileID: 8300000, guid: 0887c8314c69e094785953171698c4eb, type: 3}
+  Effects:
+  - {fileID: 8300000, guid: d3a62ff4440e98245ba75378cc6b6239, type: 3}
+  - {fileID: 8300000, guid: d4afcd0b30776fb4bbf5b499dbe6cfb2, type: 3}
+  - {fileID: 8300000, guid: ec94b6e1ab300ff4592aa9c1c0ec6678, type: 3}
+  - {fileID: 8300000, guid: 6ccedbbdc0cd46a41b0092b6fca8a70a, type: 3}
+  - {fileID: 8300000, guid: 04746453c7854334bb0e891ca97faca7, type: 3}
+  - {fileID: 8300000, guid: c53cda13a87d2b6418bb90ab90579456, type: 3}
+  - {fileID: 8300000, guid: 81a8a0ce4bff06445b55347b3acd720c, type: 3}
+  - {fileID: 8300000, guid: 22db34d0592c1684bac7f350a146cc47, type: 3}
+  - {fileID: 8300000, guid: e7cb4c4a7552ae44b9805e6117b4e6b2, type: 3}
+  - {fileID: 8300000, guid: 932b9758d99f4c845b024331045b95de, type: 3}
+  - {fileID: 8300000, guid: 2fac4f4253c108540a71f0246423ce0f, type: 3}
+  - {fileID: 8300000, guid: 7b369a38ef986434781ab0d31c714d33, type: 3}
+  - {fileID: 8300000, guid: 8e611a11086e4d8409d4fd1d95f0a654, type: 3}
+  - {fileID: 8300000, guid: 1669f953ed56f554fbfcc11e8f29982e, type: 3}
+  - {fileID: 8300000, guid: d84b91f67819f7b49a0a0e5feda49af3, type: 3}
+  - {fileID: 8300000, guid: 2ab17e5a980eabb4e8f4a94948f78c45, type: 3}
+  - {fileID: 8300000, guid: 11e3448fdfe2db446a57dfacc97692c1, type: 3}
+  - {fileID: 8300000, guid: 3d0821252eaa01d47bb1b12d48b5ec7c, type: 3}
+  - {fileID: 8300000, guid: 475d747a6258a8c438968bcb4f9ce0b1, type: 3}
+  - {fileID: 8300000, guid: 93867a49426874a4089bd0300c5c6167, type: 3}
+  - {fileID: 8300000, guid: 2d3ab4312f83fdb4cb2f42b6b6b83585, type: 3}
+  - {fileID: 8300000, guid: 5c95dd82790dc5849b658ba442d1349a, type: 3}
+  - {fileID: 8300000, guid: aa83cef5aba5bdc4cb74478446f996e4, type: 3}
+  - {fileID: 8300000, guid: b0aab0595b934304aa51d2afb09be1e5, type: 3}
+  - {fileID: 8300000, guid: 8e012b441602c5d4d8dd1a205c33b143, type: 3}
+  - {fileID: 8300000, guid: b41ad956e4c977143932d356d34241d4, type: 3}
+  - {fileID: 8300000, guid: 5c3286ee6f1d5b841aa42abaa4430a8a, type: 3}
+  - {fileID: 8300000, guid: 9858b2793ffac2142b627e1e0c7e4be8, type: 3}
+  - {fileID: 8300000, guid: 35ef843b4fc1c5040825656147db26d6, type: 3}
+  - {fileID: 8300000, guid: 78e479c8faa3c9a41b76e8210cad5af9, type: 3}
+  - {fileID: 8300000, guid: 46bddb4e26fa036488ba63c85b499c80, type: 3}
+  - {fileID: 8300000, guid: 468d46ee116e8d44a883e8a5814c93b0, type: 3}
+  - {fileID: 8300000, guid: 0eda855c78eb9174d9e27dc2a66c53a4, type: 3}
+  - {fileID: 8300000, guid: 345c9948d2a622f48b45c923b654783b, type: 3}

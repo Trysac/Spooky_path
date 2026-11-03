@@ -1,0 +1,17 @@
+{
+    "name": "SpookyPath.Game",
+    "rootNamespace": "SpookyPath.Game",
+    "references": [
+        "SpookyPath.Core",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
