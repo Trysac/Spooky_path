@@ -32,6 +32,28 @@ namespace SpookyPath.Core.Tests
         }
 
         [Test]
+        public void Every_sign_can_be_read_while_walking_past_it_on_any_side()
+        {
+            int[,] sides = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+            foreach (LevelDefinition level in Levels.All)
+            {
+                LevelMap map = level.Parse();
+                foreach (Placement sign in map.All(PlacementKind.Sign))
+                {
+                    Vec2 cell = LevelMap.CellCenter(sign.X, sign.Y);
+                    var position = new Vec2(cell.X, cell.Y + Tuning.SignOffset);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        int x = sign.X + sides[i, 0], y = sign.Y + sides[i, 1];
+                        if (!map.IsWalkable(x, y)) continue;
+                        Assert.Less(Vec2.Distance(LevelMap.CellCenter(x, y), position), Tuning.SignReadRadius,
+                            $"{level.Name}: the sign at column {sign.X}, row {sign.Y} stays hidden from the floor cell at column {x}, row {y}");
+                    }
+                }
+            }
+        }
+
+        [Test]
         public void Outside_the_map_and_short_rows_are_pits()
         {
             LevelMap map = Parse("PE..", "..");

@@ -394,8 +394,8 @@ namespace SpookyPath.Game
                         BuildSpikes(cell);
                         break;
                     case PlacementKind.Sign:
-                        Place(art.Gravestone, cell + new Vector3(0f, 0f, 1.3f), 180f, Vector3.one * 1.2f);
-                        Signs.Add(new SignView { Position = cell + new Vector3(0f, 0f, 1.3f), Text = p.Variant < Definition.Signs.Count ? Definition.Signs[p.Variant] : string.Empty });
+                        Place(art.Gravestone, cell + new Vector3(0f, 0f, Tuning.SignOffset), 180f, Vector3.one * 1.2f);
+                        Signs.Add(new SignView { Position = cell + new Vector3(0f, 0f, Tuning.SignOffset), Text = p.Variant < Definition.Signs.Count ? Definition.Signs[p.Variant] : string.Empty });
                         break;
                     case PlacementKind.Ward:
                         BuildWard(cell);

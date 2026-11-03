@@ -5,6 +5,10 @@ namespace SpookyPath.Core
     {
         // Grid
         public const float CellSize = 4f;
+        /// <summary>Signs stand this far towards the row above the centre of their cell.</summary>
+        public const float SignOffset = 1.3f;
+        /// <summary>A sign's text shows while the explorer is within this ground distance of it.</summary>
+        public const float SignReadRadius = 5.5f;
 
         // Explorer
         public const float MaxHealth = 100f;

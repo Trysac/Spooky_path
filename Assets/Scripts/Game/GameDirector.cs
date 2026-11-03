@@ -822,7 +822,7 @@ namespace SpookyPath.Game
             string signText = null;
             foreach (SignView sign in level.Signs)
             {
-                if (Distance2(p, sign.Position) < 3.8f) signText = sign.Text;
+                if (Distance2(p, sign.Position) < Tuning.SignReadRadius) signText = sign.Text;
             }
             hud.SetSign(signText);
             hud.SetPrompt(prompt);

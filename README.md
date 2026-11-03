@@ -103,7 +103,7 @@ player,
 - **Rules without the engine.** The explorer's health, mana and stamina, the spells, the
   strike arc, the skeletons' perception and state machine, the text-map levels, levers,
   plates, gates, keys and doors, the warded artefact, scoring and the save format live in
-  `Assets/Scripts/Core`, a plain C# assembly with no Unity references, covered by 72 EditMode
+  `Assets/Scripts/Core`, a plain C# assembly with no Unity references, covered by 73 EditMode
   tests. The Unity layer builds the levels, moves bodies, plays effects and reads input; 17
   PlayMode tests drive the real scene through menus, puzzles, deaths and the ending.
 - **Levels as text.** Each level is a small ASCII map (`Assets/Scripts/Core/Levels.cs`): one
