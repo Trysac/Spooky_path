@@ -5,6 +5,8 @@ three levels of crypts, bone halls and paths over lava to destroy the artefact t
 darkness from the bottom of the dungeon, fighting skeletons with a staff and four spells and
 solving locks, levers and pressure plates on the way.
 
+![Gameplay](docs/media/gameplay.gif)
+
 ![Heart of Darkness: the warded artefact, a skeleton guard and a firebolt in flight](docs/screenshots/artefact.png)
 
 | | |
