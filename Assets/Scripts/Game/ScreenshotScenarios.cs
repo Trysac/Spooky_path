@@ -13,6 +13,9 @@ namespace SpookyPath.Game
     /// The save lives in memory while capturing, so PlayerPrefs are never touched. The same hook
     /// runs inside the editor (ProjectBuilder.CaptureScreenshots), rendering the camera and the HUD
     /// off screen and blending them, for machines that cannot launch the built player.
+    /// Adding <c>-frames N [-fps F]</c> records N frames per scenario at a fixed timestep instead of
+    /// one shot, into <c>&lt;folder&gt;/&lt;scenario&gt;/frame_0000.png...</c>; the <c>gameplay</c>
+    /// scenario has the explorer fight two skeletons while it records (for the README GIF).
     /// </summary>
     public sealed class ScreenshotScenarios : MonoBehaviour
     {
@@ -23,6 +26,8 @@ namespace SpookyPath.Game
 
         string folder;
         string[] scenarios;
+        int frames;
+        int fps = 15;
         RenderTexture sceneTarget;
         RenderTexture uiTarget;
 
@@ -37,6 +42,8 @@ namespace SpookyPath.Game
             var host = new GameObject(nameof(ScreenshotScenarios)).AddComponent<ScreenshotScenarios>();
             host.folder = target;
             host.scenarios = (Argument("-scenario") ?? DefaultScenarios).Split(',');
+            host.frames = int.TryParse(Argument("-frames"), out int frames) ? frames : 0;
+            host.fps = int.TryParse(Argument("-fps"), out int fps) && fps > 0 ? fps : 15;
         }
 
         IEnumerator Start()
@@ -54,6 +61,12 @@ namespace SpookyPath.Game
             {
                 string scenario = raw.Trim();
                 yield return Stage(director, scenario);
+                if (frames > 0)
+                {
+                    yield return Record(scenario);
+                    Time.timeScale = 1f;
+                    continue;
+                }
                 Texture2D shot;
                 if (Application.isEditor)
                 {
@@ -185,6 +198,16 @@ namespace SpookyPath.Game
                     yield return new WaitForSecondsRealtime(0.15f);
                     break;
 
+                case "gameplay":
+                    director.StartLevel(1);
+                    director.Invincible = true;
+                    director.PlacePlayer(LevelView.World(13, 9), Vector3.forward);
+                    director.SpawnEnemy(EnemyKind.Minion, LevelView.World(11, 7));
+                    director.SpawnEnemy(EnemyKind.Warrior, LevelView.World(16, 7));
+                    yield return new WaitForSecondsRealtime(3f);
+                    director.StartCoroutine(Fight(director));
+                    break;
+
                 case "pause":
                     director.StartLevel(1);
                     yield return new WaitForSecondsRealtime(3.5f);
@@ -213,6 +236,101 @@ namespace SpookyPath.Game
                     break;
             }
         }
+
+        /// <summary>Writes the given number of frames at a fixed timestep (Time.captureFramerate).</summary>
+        IEnumerator Record(string scenario)
+        {
+            string target = Path.Combine(folder, scenario);
+            Directory.CreateDirectory(target);
+            Time.captureFramerate = fps;
+            for (int i = 0; i < frames; i++)
+            {
+                Texture2D shot;
+                if (Application.isEditor)
+                {
+                    yield return null;
+                    shot = CaptureOffscreen();
+                }
+                else
+                {
+                    yield return new WaitForEndOfFrame();
+                    shot = ScreenCapture.CaptureScreenshotAsTexture();
+                }
+                File.WriteAllBytes(Path.Combine(target, $"frame_{i:0000}.png"), shot.EncodeToPNG());
+                Destroy(shot);
+            }
+            Time.captureFramerate = 0;
+            Debug.Log($"Saved {frames} frames of {scenario}");
+        }
+
+        /// <summary>
+        /// Plays the explorer for the recording: walks up to the nearest skeleton and strikes it with
+        /// the staff, opening with a Frost Nova when two are close and a Firebolt from range.
+        /// </summary>
+        static IEnumerator Fight(GameDirector director)
+        {
+            float strikeWait = 0f;
+            float boltWait = 0.4f;
+            bool novaUsed = false;
+            while (director.ScriptedInput && director.Phase == Phase.Playing)
+            {
+                float dt = Time.deltaTime;
+                strikeWait -= dt;
+                boltWait -= dt;
+                Vector3 me = director.Player.transform.position;
+                EnemyController target = null;
+                float best = float.MaxValue;
+                int close = 0;
+                foreach (EnemyController enemy in director.Enemies)
+                {
+                    if (enemy.Brain.IsDead) continue;
+                    float distance = Vector3.Distance(Flat(enemy.transform.position), Flat(me));
+                    if (distance < 3.5f) close++;
+                    if (distance < best)
+                    {
+                        best = distance;
+                        target = enemy;
+                    }
+                }
+                if (target == null)
+                {
+                    director.Scripted.Move = Vector2.zero;
+                    yield return null;
+                    continue;
+                }
+                Vector3 to = Flat(target.transform.position) - Flat(me);
+                Vector2 toward = new Vector2(to.x, to.z).normalized;
+                if (!novaUsed && close >= 2)
+                {
+                    director.Scripted.Spell = (int)SpellKind.FrostNova;
+                    novaUsed = true;
+                }
+                else if (best > 4f && boltWait <= 0f)
+                {
+                    // Face the skeleton for a frame, then throw the bolt.
+                    director.Scripted.Move = toward * 0.2f;
+                    director.Scripted.Spell = (int)SpellKind.Firebolt;
+                    boltWait = 1.6f;
+                }
+                else if (best > 1.7f)
+                {
+                    director.Scripted.Move = toward;
+                }
+                else
+                {
+                    director.Scripted.Move = toward * 0.05f;
+                    if (strikeWait <= 0f)
+                    {
+                        director.Scripted.Strike = true;
+                        strikeWait = 0.45f;
+                    }
+                }
+                yield return null;
+            }
+            director.Scripted.Move = Vector2.zero;
+        }
+
+        static Vector3 Flat(Vector3 v) => new Vector3(v.x, 0f, v.z);
 
         static IEnumerator Walk(GameDirector director, Vector2 direction, float seconds)
         {
